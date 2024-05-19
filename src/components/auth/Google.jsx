@@ -4,7 +4,6 @@ import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 
 export default function GoogleLoginPage() {
-
   const [accessToken, setAccessToken] = useState(null);
 
   const responseGoogle = (response) => {
@@ -34,14 +33,14 @@ export default function GoogleLoginPage() {
   // Call exchangeCodeForToken function when needed, for example after successful authentication
 
   return (
-      <GoogleLogin
-        onSuccess={responseGoogle}
-        onFailure={onFailure}
-        cookiePolicy={"single_host_origin"}
-        text={"signin"}
-        className="google-login-button"
-        shape="circle"
-      />
+    <GoogleLogin
+      onSuccess={responseGoogle}
+      onFailure={onFailure}
+      cookiePolicy={"single_host_origin"}
+      text={"signin"}
+      className="google-login-button  outline outline-1 outline-[#275DF5]"
+      shape="circle"
+      theme="outline blue"
+    />
   );
 }
-

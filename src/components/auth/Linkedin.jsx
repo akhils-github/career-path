@@ -1,6 +1,6 @@
 import React from "react";
 import { LinkedIn } from "react-linkedin-login-oauth2";
-import linkedin from "react-linkedin-login-oauth2/assets/linkedin.png";
+import LinkedInIcon from "/icons/linkedin.svg";
 import { useNavigate } from "react-router-dom";
 
 const LinkedInLoginButton = () => {
@@ -31,9 +31,11 @@ const LinkedInLoginButton = () => {
       {({ linkedInLogin }) => (
         <span
           onClick={linkedInLogin}
-          // src={linkedin}
-        className="border rounded-full px-4 py-1.5"
-        >LinkedIn</span>
+          className="border rounded-full px-2  py-1 w-32 h-10 flex gap-2 items-center  outline outline-1 outline-[#275DF5]"
+        >
+          <img src={LinkedInIcon} alt="" />
+          LinkedIn
+        </span>
       )}
     </LinkedIn>
 
