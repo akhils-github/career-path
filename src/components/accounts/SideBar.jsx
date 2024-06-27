@@ -20,15 +20,23 @@ export default function AccountSideBar() {
             )}
           </div>
           <div>
-            <p>Start your new career journey!</p>
-            <p className="text-sm">Welcome to the world of opportunities.</p>
+            {pathname === "/" ? (
+              <>
+                <p className="text-lg whitespace-nowrap font-bold">Start your new career journey!</p>
+                <p className="text-xs">
+                  Welcome to the world of opportunities.
+                </p>
+              </>
+            ) : (
+              <p className="text-[#FFFFFF99]">Account Created!</p>
+            )}
           </div>
         </div>
 
         <div className="border-gray-400 border-r-2 w-5 border-dashed  h-20"></div>
         <div className="flex gap-2 items-center">
           <div className="w-10 flex items-center justify-center">
-            {pathname === ("/profile-create") ? (
+            {pathname === "/profile-create" ? (
               <div className="rounded-full size-10">
                 {pathname === "/profile-detail" ? (
                   <img src="/icons/tick-circle.svg" alt="" className="w-24" />
@@ -36,12 +44,25 @@ export default function AccountSideBar() {
                   <img src="/icons/multi-circle.svg" alt="" className="w-24" />
                 )}
               </div>
+            ) : pathname === "/profile-detail" ? (
+              <div className="rounded-full size-10">
+                <img src="/icons/tick-circle.svg" alt="" className="w-20" />
+              </div>
             ) : (
               <div className="bg-[#FFFFFF99] rounded-full size-6" />
             )}
           </div>
           <div>
-            <p>Well begun is half done.</p>
+            {pathname === "/profile-create" ? (
+              <div className="">
+                <p className="text-lg font-bold">Well begun is half done.</p>
+                <p className="text-xs">Fill the details to start</p>
+              </div>
+            ) : pathname === "/profile-detail" ? (
+              <p className="text-[#FFFFFF99]">Well begun is half done.</p>
+            ) : (
+              <p className="text-[#FFFFFF99]">Well begun is half done.</p>
+            )}
           </div>
         </div>
 
