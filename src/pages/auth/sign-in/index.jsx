@@ -116,7 +116,7 @@ export default function SignIn() {
 
           <p className="text-center">
             Don’t have an account?{" "}
-            <Link to={""} className="text-[#5B8AD8] cursor-pointer">
+            <Link to={"/"} className="text-[#5B8AD8] cursor-pointer">
               Sign up
             </Link>
           </p>
