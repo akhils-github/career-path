@@ -6,7 +6,7 @@ export default function SignIn() {
   return (
     <div className="h-screen w-full flex justify-center items-center">
       <div className="w-5/12">
-        <img src="public/logo/seekats-logo-blue.svg" alt="" />
+        <img src="/logo/seekats-logo-blue.svg" alt="" />
         <div className="bg-white shadow px-8 py-5 rounded-md my-3">
           <div className="mb-10">
             <p className="text-2xl font-semibold">Login your Account</p>
