@@ -22,7 +22,9 @@ export default function AccountSideBar() {
           <div>
             {pathname === "/" ? (
               <>
-                <p className="text-lg whitespace-nowrap font-bold">Start your new career journey!</p>
+                <p className="text-lg whitespace-nowrap font-bold">
+                  Start your new career journey!
+                </p>
                 <p className="text-xs">
                   Welcome to the world of opportunities.
                 </p>
@@ -70,11 +72,27 @@ export default function AccountSideBar() {
 
         <div className="flex gap-2 items-center">
           <div className="w-10 flex justify-center items-center ">
-            <div className="bg-[#FFFFFF99] rounded-full size-6"></div>
+            {pathname === "/profile-detail" ? (
+              <div className="rounded-full size-10">
+                <img src="/icons/multi-circle.svg" alt="" className="w-24" />
+              </div>
+            ) : (
+              <div className="bg-[#FFFFFF99] rounded-full size-6" />
+            )}
+            {/* <div className="bg-[#FFFFFF99] rounded-full size-6"></div> */}
           </div>
-          <div>
-            <p>Get noticed faster</p>
-          </div>
+          {pathname === "/profile-detail" ? (
+            <div className="">
+              <p className="text-lg font-bold">Get noticed faster</p>
+              <p className="text-xs">
+                Fill additional details to get attracged by employers faster.
+              </p>
+            </div>
+          ) : (
+            <div>
+              <p className="text-[#FFFFFF99]">Get noticed faster</p>
+            </div>
+          )}
         </div>
 
         <div className="border-gray-400 border-r-2 w-5 border-dashed  h-20"></div>
@@ -83,8 +101,8 @@ export default function AccountSideBar() {
           <div className="w-10 flex justify-center items-center ">
             <div className="bg-[#FFFFFF99] rounded-full size-6"></div>
           </div>
-          <div>
-            <p className="text-base">Welcome to your</p>
+          <div className="text-[#FFFFFF99]">
+            <p className="text-base ">Welcome to your</p>
             <p> Dashboard!Your profile is ready.</p>
           </div>
         </div>
