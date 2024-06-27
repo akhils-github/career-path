@@ -24,7 +24,7 @@ export default function GooglBtn() {
       }}
     >
       <div className="flex cursor-pointer gap-1.5 items-center px-3 border rounded-full w-fit h-10">
-        <img src="public/icons/Google.svg" alt="Google" className="w-7" />
+        <img src="/icons/Google.svg" alt="Google" className="w-7" />
         <p>Google</p>
            
       </div>
