@@ -42,10 +42,10 @@ export default function SignUp() {
       if (res.data.status === 1) {
         setLoader(false);
         toast.success("User registered successfully");
-        console.log(res.data)
+        console.log(res.data);
         localStorage.setItem("access_token", res.data.access_token);
         localStorage.setItem("refresh_token", res.data.refresh_token);
-        navigate("/profile-create")
+        navigate("/profile-create");
       } else {
         setLoader(false);
         toast.error("Password or email address is invalid");
@@ -186,9 +186,18 @@ export default function SignUp() {
             </span>
           </div>
 
-          <button className="bg-[#1E3964] mt-2.5 h-10 w-fit rounded-full text-sm px-3 flex items-center text-white gap-2 ">
-            <p>Create Your Account</p>
-            <ArrowRight className="size-5" />
+          <button className="bg-[#1E3964] mt-2.5  h-10 w-48 rounded-full text-sm  flex  justify-center items-center text-white gap-2 ">
+            {loader ? (
+              <div className="flex items-center gap-3">
+                <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
+                Accont Creating
+              </div>
+            ) : (
+              <>
+                <p>Create Your Account</p>
+                <ArrowRight className="size-5" />
+              </>
+            )}
           </button>
         </form>
       </div>
