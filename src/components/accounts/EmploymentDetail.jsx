@@ -39,7 +39,7 @@ export default function EmploymentDetail() {
   return (
     <>
       <div className=" bg-white my-2 px-8 py-6 flex flex-col gap-2 rounded">
-        <h5>Your Profile Headline</h5>
+        <h5 className="font-semibold text-lg">Your Profile Headline</h5>
         <p>Give a small description to explain you better.</p>
         <input
           type="text"
