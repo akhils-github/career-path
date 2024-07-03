@@ -6,7 +6,7 @@ export default function AccountSideBar() {
   console.log(pathname);
 
   return (
-    <div className="bg-[#1E3964] h-screen w-full items-center flex flex-col py-3">
+    <div className="bg-[#1E3964]  h-full w-full items-center flex flex-col py-3">
       <div className="py-4">
         <img src="/logo/seekats_logo.svg" alt="" className="w-40 " />
       </div>
@@ -14,9 +14,9 @@ export default function AccountSideBar() {
         <div className="flex gap-2 items-center">
           <div className="size-8 rounded-full">
             {pathname === "/" ? (
-              <img src="/icons/multi-circle.svg" alt="" className="w-24" />
+              <img src="/icons/multi-circle.svg" alt="" className="w-20" />
             ) : (
-              <img src="/icons/tick-circle.svg" alt="" className="w-20" />
+              <img src="/icons/tick-circle.svg" alt="" className="w-16" />
             )}
           </div>
           <div>
@@ -39,15 +39,15 @@ export default function AccountSideBar() {
         <div className="flex gap-2 items-center">
           <div className="w-8 flex items-center justify-center">
             {pathname === "/profile-create" ? (
-              <div className="rounded-full size-10">
+              <div className="rounded-full size-8">
                 {pathname === "/profile-detail" ? (
-                  <img src="/icons/tick-circle.svg" alt="" className="w-24" />
+                  <img src="/icons/tick-circle.svg" alt="" className="w-20" />
                 ) : (
-                  <img src="/icons/multi-circle.svg" alt="" className="w-24" />
+                  <img src="/icons/multi-circle.svg" alt="" className="w-20" />
                 )}
               </div>
             ) : pathname === "/profile-detail" ? (
-              <div className="rounded-full size-10">
+              <div className="rounded-full size-8">
                 <img src="/icons/tick-circle.svg" alt="" className="w-20" />
               </div>
             ) : (
