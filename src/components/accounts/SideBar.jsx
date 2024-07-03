@@ -12,11 +12,11 @@ export default function AccountSideBar() {
       </div>
       <div className="flex flex-col   justify-center py-2 gap-y-2  h-full text-white">
         <div className="flex gap-2 items-center">
-          <div className="size-8 rounded-full">
+          <div className="size-7 rounded-full">
             {pathname === "/" ? (
               <img src="/icons/multi-circle.svg" alt="" className="w-20" />
             ) : (
-              <img src="/icons/tick-circle.svg" alt="" className="w-16" />
+              <img src="/icons/tick-circle.svg" alt="" className="w-20" />
             )}
           </div>
           <div>
@@ -35,11 +35,11 @@ export default function AccountSideBar() {
           </div>
         </div>
 
-        <div className="border-gray-400 border-r-2 w-4 border-dashed  h-16"></div>
+        <div className="border-gray-400 border-r-2 w-4 border-dashed  h-14"></div>
         <div className="flex gap-2 items-center">
-          <div className="w-8 flex items-center justify-center">
+          <div className="w-7 flex items-center justify-center">
             {pathname === "/profile-create" ? (
-              <div className="rounded-full size-8">
+              <div className="rounded-full size-7">
                 {pathname === "/profile-detail" ? (
                   <img src="/icons/tick-circle.svg" alt="" className="w-20" />
                 ) : (
@@ -68,7 +68,7 @@ export default function AccountSideBar() {
           </div>
         </div>
 
-        <div className="border-gray-400 border-r-2 w-4 border-dashed  h-16"></div>
+        <div className="border-gray-400 border-r-2 w-4 border-dashed  h-14"></div>
 
         <div className="flex gap-2 items-center">
           <div className="w-8 flex justify-center items-center ">
@@ -85,7 +85,7 @@ export default function AccountSideBar() {
             <div className="">
               <p className="text-sm font-bold">Get noticed faster</p>
               <p className="text-xs">
-                Fill additional details to get attracged by employers faster.
+                Fill additional details to get attracged <br /> by employers faster.
               </p>
             </div>
           ) : (
@@ -95,7 +95,7 @@ export default function AccountSideBar() {
           )}
         </div>
 
-        <div className="border-gray-400 border-r-2 w-4 border-dashed  h-16"></div>
+        <div className="border-gray-400 border-r-2 w-4 border-dashed  h-14"></div>
 
         <div className="flex gap-2 items-center">
           <div className="w-8 flex justify-center items-center ">
