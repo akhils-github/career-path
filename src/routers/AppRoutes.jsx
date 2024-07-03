@@ -14,14 +14,17 @@ export default function AppRoutes() {
       <Routes>
       <Route path="/sign-in" element={<SignIn />} />
         <Route path="/" element={<AccountLayout />}>
+          <Route index element={<SignUp />} />
           <Route path="sign-up" element={<SignUp />} />
           <Route path="profile-create" element={<ProfileCreate />} />
           <Route path="profile-detail" element={<ProfileDetail />} />
+
         </Route>
         <Route path="/profile" element={<ProfileLayout />}>
           <Route index element={<ProfileDetailView />} />
   x
         </Route>
+
       </Routes>
     </BrowserRouter>
   );

@@ -78,4 +78,7 @@ input:-webkit-autofill {
 .input-box{
   @apply rounded border border-[#00000080] w-full px-2 focus:border-[#2E2E2E]/60 text-sm h-10 text-zinc-500
 }
+.heading{
+  @apply font-semibold text-xl
+}
 

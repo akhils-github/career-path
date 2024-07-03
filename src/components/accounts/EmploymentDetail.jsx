@@ -39,7 +39,7 @@ export default function EmploymentDetail() {
   return (
     <>
       <div className=" bg-white my-2 px-8 py-6 flex flex-col gap-2 rounded">
-        <h5 className="font-semibold text-lg">Your Profile Headline</h5>
+        <h5 className="heading">Your Profile Headline</h5>
         <p>Give a small description to explain you better.</p>
         <input
           type="text"
@@ -51,7 +51,7 @@ export default function EmploymentDetail() {
       </div>
       <div className="bg-white px-8 py-6">
         <div className="px-3 pb-6">
-          <h5>Your current or latest Employment Details</h5>
+          <h5 className="heading">Your current or latest Employment Details</h5>
           <p>
             Give insights of your professional journey. We will make it more
             colorful!
@@ -446,12 +446,13 @@ export default function EmploymentDetail() {
         </form>
       </div>
       <div className=" bg-white my-2 px-8 py-6 flex flex-col gap-2 rounded">
-        <h5>Your Profile Headline</h5>
-        <p>Give a small description to explain you better.</p>
+        <h5 className="heading">Key Professional Skills</h5>
+        <p>
+          Mention your professional skills which can be applied in your work
+          place
+        </p>
         <input
           type="text"
-          name=""
-          id=""
           className="input-box"
           placeholder="Budling Designer in construction / Civil Engineering with 4 years experience"
         />
