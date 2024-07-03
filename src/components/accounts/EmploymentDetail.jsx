@@ -1,10 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
 import { customSelectStyles } from "../../utils/customStyles";
+import { useQuery } from "@tanstack/react-query";
+import { INDUSTRIES, SUB_INDUSTRIES, newRequest } from "../../api";
 
 export default function EmploymentDetail() {
   const { register, control } = useForm();
+
+  // GET all INDUSTRIES
+  const [industries, setIndustries] = useState("");
+  const { data: industryListing } = useQuery({
+    queryKey: ["industryListing"],
+    queryFn: () => newRequest.get(INDUSTRIES).then((res) => res.data),
+  });
+  console.log(industryListing);
+  let industryList = industryListing?.map((i) => {
+    return { id: i.id, value: i.id, label: i.name };
+  });
+  const handleIndustry = (i) => {
+    setIndustries(i);
+  };
+
+  // GET all SUB INDUSTRIES
+  const [subIndustries, setSubIndustries] = useState("");
+  const { data: subIndustryListing } = useQuery({
+    queryKey: ["subIndustryListing"],
+    queryFn: () => newRequest.get(SUB_INDUSTRIES).then((res) => res.data),
+  });
+
+  let subIndustryList = subIndustryListing?.map((i) => {
+    return { id: i.id, value: i.id, label: i.name };
+  });
+  const handleSubIndustry = (i) => {
+    setSubIndustries(i);
+  };
+
   return (
     <>
       <div className=" bg-white my-2 px-20 py-6 flex flex-col gap-2 rounded">
@@ -32,23 +63,23 @@ export default function EmploymentDetail() {
               Industry
             </label>
             <Controller
-              name="state"
+              name="industry"
               control={control}
               defaultValue=""
               rules={{ required: true }}
               render={({ field }) => (
                 <Select
                   required
-                  // selected={selectedState}
-                  // value={selectedState}
-                  // onChange={(selectedOption) => {
-                  //   handleState(selectedOption);
-                  //   field.onChange(selectedOption);
-                  // }}
+                  selected={industries}
+                  value={industries}
+                  onChange={(selectedOption) => {
+                    handleIndustry(selectedOption);
+                    field.onChange(selectedOption);
+                  }}
                   components={{
                     IndicatorSeparator: () => null,
                   }}
-                  // options={stateLists}
+                  options={industryList}
                   isSearchable={true}
                   styles={customSelectStyles}
                   placeholder="Select"
@@ -75,16 +106,16 @@ export default function EmploymentDetail() {
               render={({ field }) => (
                 <Select
                   required
-                  // selected={selectedState}
-                  // value={selectedState}
-                  // onChange={(selectedOption) => {
-                  //   handleState(selectedOption);
-                  //   field.onChange(selectedOption);
-                  // }}
+                  selected={subIndustries}
+                  value={subIndustries}
+                  onChange={(selectedOption) => {
+                    handleSubIndustry(selectedOption);
+                    field.onChange(selectedOption);
+                  }}
                   components={{
                     IndicatorSeparator: () => null,
                   }}
-                  // options={stateLists}
+                  options={subIndustryList}
                   isSearchable={true}
                   styles={customSelectStyles}
                   placeholder="Select"

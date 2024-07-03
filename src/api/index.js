@@ -45,6 +45,8 @@ export const setAuthToken = (token) => {
 // LOGIN USERS
 export const LOGIN = "users/login/";
 export const REGISTER_USER = "users/register/";
+export const INDUSTRIES = "users/industries/";
+export const SUB_INDUSTRIES = "users/sub-industries/";
 
 // Interceptors for token inclusion
 const addTokenToRequest = (config) => {
