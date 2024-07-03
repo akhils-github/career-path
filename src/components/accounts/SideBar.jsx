@@ -109,7 +109,7 @@ export default function AccountSideBar() {
       </div>
 
       <div className="mt-auto">
-        <img src="public/images/account/job-hunt.png" alt="" className="w-40" />
+        <img src="/images/account/job-hunt.png" alt="" className="w-40" />
       </div>
     </div>
   );
