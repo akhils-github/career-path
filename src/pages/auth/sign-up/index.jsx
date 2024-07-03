@@ -64,16 +64,16 @@ export default function SignUp() {
   };
 
   return (
-    <div className="w-full my-1.5 px-20">
+    <div className="w-full  px-20 overflow-y-auto overflow-y-min">
       <Link
         to="/sign-in"
-        className="flex justify-end w-full gap-1.5 text-base py-2"
+        className="flex justify-end w-full gap-1.5 text-sm py-2"
       >
         Already Registered?
         <span className="text-[#275DF5] cursor-pointer">Login</span> here
       </Link>
-      <div className="bg-[#FFFFFF] rounded lg:px-24 md:px-6 py-5 shadow-md max-w-4xl">
-        <h3 className="font-bold text-lg px-3">
+      <div className="bg-[#FFFFFF] rounded lg:px-24 md:px-6 py-3 shadow-md max-w-4xl">
+        <h3 className="font-bold text-base px-3">
           Create account faster using
         </h3>
         <div className="flex gap-2 py-2.5 px-3 items-center">
@@ -84,7 +84,7 @@ export default function SignUp() {
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="grid grid-cols-1 gap-y-3 mt-3"
+          className="grid grid-cols-1 gap-y-3 mt-2.5"
         >
           <div className="flex px-3 group flex-col space-y-2">
             <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
@@ -96,7 +96,7 @@ export default function SignUp() {
               disable={false}
               placeholder="Enter your personal Email ID"
               {...register("email")}
-              className="rounded-md border border-[#C7C7C7] w-full px-2 focus:border-[#2E2E2E] text-sm border-opacity-60 h-10 text-zinc-500"
+              className="rounded-md border border-[#C7C7C7] w-full px-2 focus:border-[#2E2E2E] text-sm border-opacity-60 h-8 text-zinc-500"
             />
             {errors?.email && (
               <span className="text-xs font-medium text-red-500">
@@ -113,7 +113,7 @@ export default function SignUp() {
               type="text"
               placeholder="Create a password for SeekATS account"
               {...register("password")}
-              className="rounded-md border border-[#C7C7C7] w-full px-2 focus:border-[#2E2E2E] text-sm border-opacity-60 h-10 text-zinc-500"
+              className="rounded-md border border-[#C7C7C7] w-full px-2 focus:border-[#2E2E2E] text-sm border-opacity-60 h-8 text-zinc-500"
             />
             {errors?.password && (
               <span className="text-xs font-medium text-red-500">
@@ -130,7 +130,7 @@ export default function SignUp() {
               type="text"
               placeholder="Confirm password for SeekATS account"
               {...register("confirmPassword")}
-              className="rounded-md border border-[#C7C7C7] w-full px-2 focus:border-[#2E2E2E] text-sm border-opacity-60 h-10 text-zinc-500"
+              className="rounded-md border border-[#C7C7C7] w-full px-2 focus:border-[#2E2E2E] text-sm border-opacity-60 h-8 text-zinc-500"
             />
             {errors?.confirmPassword && (
               <span className="text-xs font-medium text-red-500">
@@ -142,7 +142,7 @@ export default function SignUp() {
             <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
               What is your experience level?
             </label>
-            <div className="flex gap-3">
+            <div className="flex gap-3 text-sm font-medium">
               <span className="px-3 border rounded-full py-0.5">
                 I have work experience
               </span>
@@ -155,7 +155,7 @@ export default function SignUp() {
           <div className="flex px-3 group flex-col space-y-2 ">
             <label
               htmlFor="file"
-              className="rounded border cursor-pointer border-dashed flex gap-2 justify-center items-center h-16 bg-[#4F7BF71A] border-[#275DF5]"
+              className="rounded border cursor-pointer border-dashed flex gap-2 justify-center items-center h-14 bg-[#4F7BF71A] border-[#275DF5]"
             >
               <input
                 id="file"
@@ -178,7 +178,7 @@ export default function SignUp() {
             )}
           </div>
 
-          <div className="flex gap-2 mt-2 px-3">
+          <div className="flex gap-2 px-3">
             <input type="checkbox" {...register("terms")} />
             <span className="text-xs font-medium text-[#00000080]">
               I agree to Terms and Conditions & Privacy Policy governing the use
@@ -186,7 +186,7 @@ export default function SignUp() {
             </span>
           </div>
 
-          <button className="bg-[#1E3964] mt-2.5  h-10 w-48 rounded-full text-sm  flex  justify-center items-center text-white gap-2 ">
+          <button className="bg-[#1E3964] m h-8 w-48 rounded-full text-sm  flex  justify-center items-center text-white gap-2 ">
             {loader ? (
               <div className="flex items-center gap-3">
                 <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
@@ -195,7 +195,7 @@ export default function SignUp() {
             ) : (
               <>
                 <p>Create Your Account</p>
-                <ArrowRight className="size-5" />
+                <ArrowRight className="size-4" />
               </>
             )}
           </button>

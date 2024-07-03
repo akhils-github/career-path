@@ -22,7 +22,7 @@ export default function AppRoutes() {
         </Route>
         <Route path="/profile" element={<ProfileLayout />}>
           <Route index element={<ProfileDetailView />} />
-  x
+
         </Route>
 
       </Routes>
