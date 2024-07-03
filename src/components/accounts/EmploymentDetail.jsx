@@ -38,7 +38,7 @@ export default function EmploymentDetail() {
 
   return (
     <>
-      <div className=" bg-white my-2 px-20 py-6 flex flex-col gap-2 rounded">
+      <div className=" bg-white my-2 px-8 py-6 flex flex-col gap-2 rounded">
         <h5>Your Profile Headline</h5>
         <p>Give a small description to explain you better.</p>
         <input
@@ -49,7 +49,7 @@ export default function EmploymentDetail() {
           placeholder="Budling Designer in construction / Civil Engineering with 4 years experience"
         />
       </div>
-      <div className="bg-white px-16 py-6">
+      <div className="bg-white px-8 py-6">
         <div className="px-3 pb-6">
           <h5>Your current or latest Employment Details</h5>
           <p>
@@ -57,7 +57,7 @@ export default function EmploymentDetail() {
             colorful!
           </p>
         </div>
-        <form className="flex flex-col gap-y-4 max-w-xl">
+        <form className="flex flex-col gap-y-4 max-w-2xl">
           <div className="flex px-3 group flex-col space-y-2">
             <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
               Industry
@@ -277,8 +277,33 @@ export default function EmploymentDetail() {
             <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
               Are you currently working here ?
             </label>
-            <div className="flex gap-5 items-center w-full">
-              <div>
+            <div className="grid grid-cols-9  gap-2 items-center w-full">
+              <div className="flex gap-3 col-span-4">
+                <Controller
+                  name="state"
+                  control={control}
+                  defaultValue=""
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <Select
+                      required
+                      // selected={selectedState}
+                      // value={selectedState}
+                      // onChange={(selectedOption) => {
+                      //   handleState(selectedOption);
+                      //   field.onChange(selectedOption);
+                      // }}
+                      components={{
+                        IndicatorSeparator: () => null,
+                      }}
+                      // options={stateLists}
+                      isSearchable={true}
+                      styles={customSelectStyles}
+                      placeholder="Select"
+                      className="rounded border border-[#C7C7C7] w-40 focus:border-[#2E2E2E] text-sm border-opacity-60 h-10 text-zinc-500"
+                    />
+                  )}
+                />
                 <Controller
                   name="state"
                   control={control}
@@ -305,7 +330,9 @@ export default function EmploymentDetail() {
                   )}
                 />
               </div>
-              <div>
+
+              <p className="text-center">To</p>
+              <div className="flex gap-2 col-span-4">
                 <Controller
                   name="state"
                   control={control}
@@ -331,36 +358,6 @@ export default function EmploymentDetail() {
                     />
                   )}
                 />
-              </div>
-              <div>To</div>
-              <div>
-                <Controller
-                  name="state"
-                  control={control}
-                  defaultValue=""
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <Select
-                      required
-                      // selected={selectedState}
-                      // value={selectedState}
-                      // onChange={(selectedOption) => {
-                      //   handleState(selectedOption);
-                      //   field.onChange(selectedOption);
-                      // }}
-                      components={{
-                        IndicatorSeparator: () => null,
-                      }}
-                      // options={stateLists}
-                      isSearchable={true}
-                      styles={customSelectStyles}
-                      placeholder="Select"
-                      className="rounded border border-[#C7C7C7] w-40 focus:border-[#2E2E2E] text-sm border-opacity-60 h-10 text-zinc-500"
-                    />
-                  )}
-                />
-              </div>
-              <div>
                 <Controller
                   name="state"
                   control={control}
@@ -448,7 +445,7 @@ export default function EmploymentDetail() {
           </div>
         </form>
       </div>
-      <div className=" bg-white my-2 px-20 py-6 flex flex-col gap-2 rounded">
+      <div className=" bg-white my-2 px-8 py-6 flex flex-col gap-2 rounded">
         <h5>Your Profile Headline</h5>
         <p>Give a small description to explain you better.</p>
         <input

@@ -64,16 +64,16 @@ export default function SignUp() {
   };
 
   return (
-    <div className="w-full  px-20">
+    <div className="w-full my-1.5 px-20">
       <Link
         to="/sign-in"
-        className="flex justify-end w-full gap-1.5 text-base py-4"
+        className="flex justify-end w-full gap-1.5 text-base py-2"
       >
         Already Registered?
         <span className="text-[#275DF5] cursor-pointer">Login</span> here
       </Link>
-      <div className="bg-[#FFFFFF] rounded lg:px-28 md:px-6 py-3 shadow-md max-w-4xl">
-        <h3 className="font-bold text-lg px-3 my-1.5">
+      <div className="bg-[#FFFFFF] rounded lg:px-24 md:px-6 py-5 shadow-md max-w-4xl">
+        <h3 className="font-bold text-lg px-3">
           Create account faster using
         </h3>
         <div className="flex gap-2 py-2.5 px-3 items-center">

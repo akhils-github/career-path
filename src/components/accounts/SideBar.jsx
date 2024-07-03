@@ -6,7 +6,7 @@ export default function AccountSideBar() {
   console.log(pathname);
 
   return (
-    <div className="bg-[#1E3964] h-screen w-[26rem] items-center flex flex-col py-3">
+    <div className="bg-[#1E3964] h-screen w-full items-center flex flex-col py-3">
       <div className="py-8">
         <img src="/logo/seekats_logo.svg" alt="" className="w-56 " />
       </div>

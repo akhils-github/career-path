@@ -5,10 +5,10 @@ import EducationDetail from "../../../components/accounts/Education";
 
 export default function ProfileCreate() {
   return (
-    <div className="px-20 py-8 max-w-4xl mx-auto flex flex-col gap-y-6">
-      <ProfileProgress  status={10}/>
-      <EmploymentDetail/>
-      <EducationDetail/>
+    <div className="px-16 py-8 mx-auto flex flex-col gap-y-6">
+      <ProfileProgress status={10} />
+      <EmploymentDetail />
+      <EducationDetail />
     </div>
   );
 }

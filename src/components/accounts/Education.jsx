@@ -9,7 +9,7 @@ export default function EducationDetail() {
   const { register, control } = useForm();
 
   return (
-    <div className="bg-white px-16 py-6">
+    <div className="bg-white px-8 py-6">
       <div className="px-3 pb-6">
         <h5>Your current or latest Employment Details</h5>
         <p>
@@ -17,7 +17,7 @@ export default function EducationDetail() {
           colorful!
         </p>
       </div>
-      <form className="flex flex-col gap-y-4 max-w-xl">
+      <form className="flex flex-col gap-y-4 max-w-2xl">
         <div className="flex px-3 group flex-col space-y-2">
           <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
             Course

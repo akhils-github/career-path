@@ -5,6 +5,7 @@ import SignUp from "../pages/auth/sign-up";
 import SignIn from "../pages/auth/sign-in";
 import ProfileCreate from "../pages/profile/create";
 import ProfileDetail from "../pages/profile/create/detail";
+import ProfileDetailView from "../pages/profile/detail";
 
 export default function AppRoutes() {
   return (
@@ -13,6 +14,11 @@ export default function AppRoutes() {
       <Route path="/sign-in" element={<SignIn />} />
         <Route path="/" element={<AccountLayout />}>
           <Route index element={<SignUp />} />
+          <Route path="profile-create" element={<ProfileCreate />} />
+          <Route path="profile-detail" element={<ProfileDetail />} />
+        </Route>
+        <Route path="/profile" element={<ProfileLayout />}>
+          <Route index element={<ProfileDetailView />} />
           <Route path="profile-create" element={<ProfileCreate />} />
           <Route path="profile-detail" element={<ProfileDetail />} />
         </Route>

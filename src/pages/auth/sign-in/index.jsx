@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
 
   const {
@@ -58,24 +58,51 @@ export default function SignIn() {
   };
 
   return (
-    <div className="h-screen w-full flex justify-center items-center bg-[#f4f6f9]">
-      <div className="w-5/12">
-        <img src="/logo/seekats-logo-blue.svg" alt="" />
-        <div className="bg-white shadow px-8 py-5 rounded-md my-3">
-          <div className="mb-10">
-            <p className="text-2xl font-semibold">Login your Account</p>
-            <p className="text-sm">
-              Please select a strong, new password that you have not used
-              before.
-            </p>
+    <div className="h-screen w-screen flex">
+      <div className="flex-[0.3] relative flex items-center justify-center bg-[#1e3964]">
+        <div className="relative w-[234px] h-[234px]">
+          <img
+            className="object-contain h-full w-full"
+            src={"/logo/seekats_logo.svg"}
+          />
+        </div>
+
+        {/* <Link
+          to=""
+          target="_blank"
+          className="absolute bottom-4 w-fit flex flex-col gap-[4px] left-20"
+        >
+          <p className="text-[0.91rem] text-[#EDEDED]">
+            Developed and maintained by
+          </p>
+          <div className="relative h-8">
+            <img
+              className="object-contain h-full w-full"
+              src={"/logo/seekats_logo.svg"}
+            />
           </div>
-          <form onSubmit={handleSubmit(onSubmit)} className="my-4">
-            <div className="flex flex-col gap-y-3 my-3">
-              <label htmlFor="">Email</label>
+        </Link> */}
+      </div>
+      <div className="flex-[0.7] bg-[#F8F9FA] flex items-center w-full justify-center !bg-center !bg-cover bg-no-repeat">
+        <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg w-[26rem]">
+          <p className="text-2xl lg:text-[27px] text-black font-medium">
+            Login to your Account
+          </p>
+          <p className="text-black text-[0.87rem] mt-3">
+            See what is going on with your business
+          </p>
+          <div className="flex text-sm flex-col gap-5 mt-8 lg:mt-11">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="" className="text-neutral-800 text-[0.91rem]">
+                Email
+              </label>
               <input
                 type="text"
                 {...register("email", { required: true })}
-                className="rounded h-10 w-full border border-[#D4D4D4] px-2"
+                autoComplete="off"
+                spellCheck="false"
+                placeholder="mail@abc.com"
+                className="!text-[#2f2c2c] placeholder:text-[#8b8b8b] shadow px-4 bg-transparent flex-grow h-11 rounded-md border border-zinc-800 w-full"
               />
               {errors.email && (
                 <span className="text-xs font-medium text-red-500">
@@ -83,13 +110,18 @@ export default function SignIn() {
                 </span>
               )}
             </div>
-            <div className="flex flex-col gap-y-3 my-3">
-              <label htmlFor="">Password</label>
-              <div className="flex items-center justify-between rounded h-10 gap-2 px-2 border border-[#D4D4D4]">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="" className="text-neutral-800 text-[0.91rem]">
+                Password
+              </label>
+              <div className="flex items-center pr-3 border border-zinc-800 w-full rounded-md h-11">
                 <input
                   type={showPassword ? "text" : "password"}
+                  autoComplete="new-password"
+                  spellCheck="false"
+                  placeholder="*****************"
                   {...register("password", { required: true })}
-                  className="px-2 w-full h-full"
+                  className="!text-[#2f2c2c] placeholder:text-[#8b8b8b]  px-4 bg-transparent flex-grow h-full "
                 />
                 {showPassword ? (
                   <Eye
@@ -103,25 +135,52 @@ export default function SignIn() {
                   />
                 )}
               </div>
+
               {errors.password && (
                 <span className="text-xs font-medium text-red-500">
                   {errors.password?.message}
                 </span>
               )}
             </div>
-            <button className="bg-[#1E3964] text-white rounded-full w-48 mx-auto my-6 h-10 flex justify-center items-center">
-              Login
-            </button>
-          </form>
-
-          <p className="text-center">
-            Don’t have an account?{" "}
-            <Link to={"/"} className="text-[#5B8AD8] cursor-pointer">
-              Sign up
-            </Link>
-          </p>
-        </div>
+          </div>
+          <button className="bg-[#1E3964] mt-9 rounded-md font-[500] flex items-center justify-center text-[0.84rem] text-white h-11 lg:h-12 w-full">
+            {loader ? (
+              <div className="flex items-center gap-3">
+                <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
+                Signing you in
+              </div>
+            ) : (
+              "Login"
+            )}
+          </button>
+          <div className="mt-4 flex items-center justify-between">
+            {/* <div className="mb-[0.125rem] flex items-center gap-2 text-[#A1A1A1]">
+              <input
+                id="remember_me"
+                name="remember_me"
+                type="checkbox"
+                className="w-[0.9rem] h-[0.9rem] bg-gray-100 rounded remember_me"
+              />
+              <label htmlFor="remember_me" className="text-[0.84rem]">
+                Remember Me
+              </label>
+            </div> */}
+            <div className="text-center">
+              Don’t have an account?{" "}
+              <Link to={"/"} className="text-[#5B8AD8] cursor-pointer">
+                Sign up
+              </Link>
+            </div>
+            {/* <Link
+              to="/forgot-password"
+              className="text-stone-300 text-[0.84rem]"
+            >
+              Forgot Password?
+            </Link> */}
+          </div>
+        </form>
       </div>
     </div>
   );
+
 }

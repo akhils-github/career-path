@@ -5,6 +5,20 @@
 html{
     background-color: #0000000A;
 }
+
+.overflow-y-min::-webkit-scrollbar {
+  width: 2px;
+}
+
+.overflow-y-min::-webkit-scrollbar-track {
+  background-color: #efff;
+  border-radius: 100px;
+}
+
+.overflow-y-min::-webkit-scrollbar-thumb {
+  background-color: #b3b0ae;
+  border-radius: 100px;
+}
 input,
 textarea,
 select {
@@ -21,3 +35,4 @@ input:-webkit-autofill {
 .input-box{
   @apply rounded border border-[#00000080] w-full px-2 focus:border-[#2E2E2E]/60 text-sm h-10 text-zinc-500
 }
+
