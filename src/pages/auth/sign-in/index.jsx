@@ -167,7 +167,7 @@ export default function SignIn() {
             </div> */}
             <div className="text-center">
               Don’t have an account?{" "}
-              <Link to={"/"} className="text-[#5B8AD8] cursor-pointer">
+              <Link to={"/sign-up"} className="text-[#5B8AD8] cursor-pointer">
                 Sign up
               </Link>
             </div>
