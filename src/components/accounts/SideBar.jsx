@@ -6,15 +6,15 @@ export default function AccountSideBar() {
   console.log(pathname);
 
   return (
-    <div className="bg-[#1E3964] h-screen w-full items-center flex flex-col py-3">
-      <div className="py-8">
-        <img src="/logo/seekats_logo.svg" alt="" className="w-56 " />
+    <div className="bg-[#1E3964]  h-full w-full items-center flex flex-col py-3">
+      <div className="py-4">
+        <img src="/logo/seekats_logo.svg" alt="" className="w-40 " />
       </div>
-      <div className="flex flex-col  w-[300px]  justify-center py-2 gap-y-2  h-full text-white">
+      <div className="flex flex-col   justify-center py-2 gap-y-2  h-full text-white">
         <div className="flex gap-2 items-center">
-          <div className="size-10 rounded-full">
+          <div className="size-7 rounded-full">
             {pathname === "/" ? (
-              <img src="/icons/multi-circle.svg" alt="" className="w-24" />
+              <img src="/icons/multi-circle.svg" alt="" className="w-20" />
             ) : (
               <img src="/icons/tick-circle.svg" alt="" className="w-20" />
             )}
@@ -22,7 +22,7 @@ export default function AccountSideBar() {
           <div>
             {pathname === "/" ? (
               <>
-                <p className="text-lg whitespace-nowrap font-bold">
+                <p className="text-sm whitespace-nowrap font-bold">
                   Start your new career journey!
                 </p>
                 <p className="text-xs">
@@ -30,24 +30,24 @@ export default function AccountSideBar() {
                 </p>
               </>
             ) : (
-              <p className="text-[#FFFFFF99]">Account Created!</p>
+              <p className="text-[#FFFFFF99] text-sm">Account Created!</p>
             )}
           </div>
         </div>
 
-        <div className="border-gray-400 border-r-2 w-5 border-dashed  h-20"></div>
+        <div className="border-gray-400 border-r-2 w-4 border-dashed  h-14"></div>
         <div className="flex gap-2 items-center">
-          <div className="w-10 flex items-center justify-center">
+          <div className="w-7 flex items-center justify-center">
             {pathname === "/profile-create" ? (
-              <div className="rounded-full size-10">
+              <div className="rounded-full size-7">
                 {pathname === "/profile-detail" ? (
-                  <img src="/icons/tick-circle.svg" alt="" className="w-24" />
+                  <img src="/icons/tick-circle.svg" alt="" className="w-20" />
                 ) : (
-                  <img src="/icons/multi-circle.svg" alt="" className="w-24" />
+                  <img src="/icons/multi-circle.svg" alt="" className="w-20" />
                 )}
               </div>
             ) : pathname === "/profile-detail" ? (
-              <div className="rounded-full size-10">
+              <div className="rounded-full size-8">
                 <img src="/icons/tick-circle.svg" alt="" className="w-20" />
               </div>
             ) : (
@@ -57,7 +57,7 @@ export default function AccountSideBar() {
           <div>
             {pathname === "/profile-create" ? (
               <div className="">
-                <p className="text-lg font-bold">Well begun is half done.</p>
+                <p className="text-sm font-bold">Well begun is half done.</p>
                 <p className="text-xs">Fill the details to start</p>
               </div>
             ) : pathname === "/profile-detail" ? (
@@ -68,42 +68,42 @@ export default function AccountSideBar() {
           </div>
         </div>
 
-        <div className="border-gray-400 border-r-2 w-5 border-dashed  h-20"></div>
+        <div className="border-gray-400 border-r-2 w-4 border-dashed  h-14"></div>
 
         <div className="flex gap-2 items-center">
-          <div className="w-10 flex justify-center items-center ">
+          <div className="w-8 flex justify-center items-center ">
             {pathname === "/profile-detail" ? (
-              <div className="rounded-full size-10">
+              <div className="rounded-full size-8">
                 <img src="/icons/multi-circle.svg" alt="" className="w-24" />
               </div>
             ) : (
-              <div className="bg-[#FFFFFF99] rounded-full size-6" />
+              <div className="bg-[#FFFFFF99] rounded-full size-5" />
             )}
             {/* <div className="bg-[#FFFFFF99] rounded-full size-6"></div> */}
           </div>
           {pathname === "/profile-detail" ? (
             <div className="">
-              <p className="text-lg font-bold">Get noticed faster</p>
+              <p className="text-sm font-bold">Get noticed faster</p>
               <p className="text-xs">
-                Fill additional details to get attracged by employers faster.
+                Fill additional details to get attracged <br /> by employers faster.
               </p>
             </div>
           ) : (
             <div>
-              <p className="text-[#FFFFFF99]">Get noticed faster</p>
+              <p className="text-[#FFFFFF99] text-sm">Get noticed faster</p>
             </div>
           )}
         </div>
 
-        <div className="border-gray-400 border-r-2 w-5 border-dashed  h-20"></div>
+        <div className="border-gray-400 border-r-2 w-4 border-dashed  h-14"></div>
 
         <div className="flex gap-2 items-center">
-          <div className="w-10 flex justify-center items-center ">
-            <div className="bg-[#FFFFFF99] rounded-full size-6"></div>
+          <div className="w-8 flex justify-center items-center ">
+            <div className="bg-[#FFFFFF99] rounded-full size-5"></div>
           </div>
           <div className="text-[#FFFFFF99]">
-            <p className="text-base ">Welcome to your</p>
-            <p> Dashboard!Your profile is ready.</p>
+            <p className="text-sm ">Welcome to your</p>
+            <p className="text-sm"> Dashboard!Your profile is ready.</p>
           </div>
         </div>
       </div>

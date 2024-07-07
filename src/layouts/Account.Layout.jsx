@@ -31,11 +31,11 @@ export default function AccountLayout() {
   const isAccess = decodeToken() || pathWithoutLayout;
   return isAccess ? (
     <div className="h-screen w-screen bg-[#F8F9FA] flex">
-      <div className="hidden bg-[#1E3964] flex-[0.3] h-full relative lg:flex items-center justify-center">
+      <div className="hidden bg-[#1E3964] flex-[0.3] h-full  relative lg:flex items-center justify-center">
         <AccountSideBar />
       </div>
 
-      <div className="flex-1 lg:flex-[0.7]  w-full h-screen overflow-y-auto overflow-y-min">
+      <div className="flex-1 lg:flex-[0.7]  w-full h-full  overflow-y-auto overflow-y-min">
         <Outlet />
       </div>
     </div>
