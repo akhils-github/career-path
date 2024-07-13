@@ -67,6 +67,18 @@ textarea:focus {
   outline: none;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  display: block;
+  background: url("/icons/calender.svg") no-repeat;
+  width: 20px;
+  height: 20px;
+  border-width: thin;
+  cursor: pointer;
+
+}
+
 button:focus {
   outline: none;
 }
@@ -82,3 +94,6 @@ input:-webkit-autofill {
   @apply font-semibold text-xl
 }
 
+.active-option{
+  @apply border-[#275DF5] text-[#275DF5] bg-[#275DF51C] 
+}

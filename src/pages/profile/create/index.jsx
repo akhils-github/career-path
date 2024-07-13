@@ -13,8 +13,8 @@ export default function ProfileCreate() {
   const [loader, setLoader] = useState(false);
   const [workingStatus, setWorkingStatus] = useState("");
   const navigate = useNavigate();
-  const { userId } = useUserStore((state) => state);
-  console.log(userId);
+  const { id } = useUserStore((state) => state.user);
+  console.log(id);
   const {
     register,
     handleSubmit,
@@ -45,7 +45,7 @@ export default function ProfileCreate() {
         end_year: data?.endYear?.value,
         currency: data?.currency?.id,
         monthly_salary: data?.monthlySalary,
-        member: userId,
+        member: id,
       },
       profile: {
         profile_heading: data?.profileHeading,
@@ -53,7 +53,7 @@ export default function ProfileCreate() {
         sub_industry: data?.subIndustry?.value,
         function_area: data?.functionalArea?.value,
         skills: data?.skills,
-        member: userId,
+        member: id,
       },
       education: [
         {

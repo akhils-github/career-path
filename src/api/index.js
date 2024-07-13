@@ -41,15 +41,20 @@ export const newFormRequest = axios.create({
 export const LOGIN = "users/login/";
 export const REGISTER_USER = "users/register/";
 
-//profile create 
+//profile create
 export const INDUSTRIES = "users/industries/";
 export const SUB_INDUSTRIES = "users/sub-industries/";
 export const COUNTRIES = "users/countries/";
 export const STATES = "users/states/";
+export const CITIES = "users/cities/";
 export const FUNCTIONAL_AREAS = "users/function-areas/";
 export const CURRENCIES = "users/currencies/";
 export const PROFILE_CREATE = "users/save/";
 
+//profile Details
+export const LANGUAGES = "users/languages/";
+export const RELIGION = "users/religions/";
+export const SAVE_MEMBER = "users/save_member/";
 
 newRequest.interceptors.request.use((config) => {
   const token = localStorage.getItem("access_token");

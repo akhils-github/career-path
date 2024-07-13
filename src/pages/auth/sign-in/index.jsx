@@ -43,9 +43,8 @@ export default function SignIn() {
       if (res.data.status === 1) {
         setLoader(false);
         toast.success("Login sucessfull");
-        localStorage.setItem("access_token", res.data.access_token);
-        localStorage.setItem("refresh_token", res.data.refresh_token);
-        localStorage.setItem("userId", res.data.id);
+     
+        localStorage.setItem("resData", JSON.stringify(res.data));
         navigate("/profile-create");
       } else {
         setLoader(false);

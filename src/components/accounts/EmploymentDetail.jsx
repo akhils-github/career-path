@@ -366,7 +366,7 @@ export default function EmploymentDetail({ register, control,workingStatus, setW
                 onClick={() => setWorkingStatus("yes")}
                 className={`rounded-full border cursor-pointer  w-14 h-8 flex items-center justify-center ${
                   workingStatus === "yes"
-                    ? "border-[#275DF5] text-[#275DF5] bg-[#275DF51C] "
+                    ? "active-option"
                     : "border-[#808080]"
                 }`}
               >
@@ -377,7 +377,7 @@ export default function EmploymentDetail({ register, control,workingStatus, setW
                 className={`rounded-full cursor-pointer border w-56 h-8 flex justify-center items-center
                   ${
                     workingStatus === "no"
-                      ? "border-[#275DF5] text-[#275DF5] bg-[#275DF51C] "
+                      ? "active-option"
                       : "border-[#808080]"
                   }   `}
               >

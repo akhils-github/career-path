@@ -6,18 +6,18 @@ import { decodeToken } from "../utils/tokenValidate";
 
 export default function AccountLayout() {
   const pathName = useLocation();
+  const isAccess = decodeToken() || pathWithoutLayout;
 
   const { setUser } = useUserStore((state) => state);
-  let userId = localStorage.getItem("userId");
+  let user = JSON.parse(localStorage.getItem("resData"));
   useEffect(() => {
-    if (userId) {
-      setUser(userId);
+    if (isAccess) {
+      setUser(user);
     }
-  }, [userId]);
+  }, [isAccess]);
 
   const pathWithoutLayout = pathName?.pathname.includes("sign-up");
 
-  const isAccess = decodeToken() || pathWithoutLayout;
   console.log(isAccess);
   return isAccess ? (
     <div className="h-screen w-screen bg-[#F8F9FA] flex">
