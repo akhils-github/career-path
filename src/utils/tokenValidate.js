@@ -1,9 +1,11 @@
-export const decodeToken = () => {
-  let localData = JSON.parse(localStorage.getItem("resData"));
-  const { access_token } = localData;
-  console.log(access_token)
+export const decodeToken = (token) => {
+  console.log(token)
+  // let localData = JSON.parse(localStorage.getItem("resData"));
+
+  // const { access_token } = localData;
+  // console.log(access_token)
   try {
-    const base64Url = access_token.split(".")[1];
+    const base64Url = token?.split(".")[1];
     const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     const jsonPayload = decodeURIComponent(
       atob(base64)
