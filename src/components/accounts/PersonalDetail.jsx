@@ -10,7 +10,7 @@ export default function PersonalDetail({
   control,
   gender,
   setGender,
-  countriesListing
+  countriesListing,
 }) {
   // GET all Countries
 
@@ -64,7 +64,7 @@ export default function PersonalDetail({
           <h5 className="text-2xl font-semibold">Personal Details</h5>
           <p className="text-sm">Tell us more about yourself.</p>
         </div>
-        <form className="flex flex-col gap-y-4 max-w-3xl">
+        <div className="flex flex-col gap-y-4 max-w-3xl">
           <div className="grid grid-cols-3">
             <div className="flex px-3 group flex-col space-y-2">
               <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
@@ -321,7 +321,7 @@ export default function PersonalDetail({
             </div>
                       
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

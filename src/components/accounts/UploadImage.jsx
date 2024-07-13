@@ -8,7 +8,7 @@ export default function UploadImage({ handleImage, image, imageFile }) {
     >
       <div>
         {image ? (
-          <img src={image} alt="" className="size-24 rounded-full " />
+          <img src={image} alt="" className="size-24 rounded-full  object-cover" />
         ) : (
           <img src="/images/account/profile.png" alt="" className="size-24" />
         )}
