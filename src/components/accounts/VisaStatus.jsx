@@ -359,7 +359,7 @@ export default function VisaStatus(props) {
             </>
           )}
         </button>
-        <Link to="#" className="text-[#275DF5] text-sm">
+        <Link to="/profile" className="text-[#275DF5] text-sm">
           Skip, I will fill these details
         </Link>
       </div>

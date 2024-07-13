@@ -57,14 +57,17 @@ export const RELIGION = "users/religions/";
 export const SAVE_MEMBER = "users/save_member/";
 
 newRequest.interceptors.request.use((config) => {
-  const token = localStorage.getItem("access_token");
+  const localData = JSON.parse(localStorage.getItem("resData"));
+  const token = localData?.access_token;
+  console.log(token)
   if (token) {
     config.headers["Authorization"] = token;
   }
   return config;
 });
 newFormRequest.interceptors.request.use((config) => {
-  const token = localStorage.getItem("access_token");
+  const localData = JSON.parse(localStorage.getItem("resData"));
+  const token = localData?.access_token;
   if (token) {
     config.headers["Authorization"] = token;
   }
@@ -72,7 +75,8 @@ newFormRequest.interceptors.request.use((config) => {
 });
 
 XFormRequest.interceptors.request.use((config) => {
-  const token = localStorage.getItem("access_token");
+  const localData = JSON.parse(localStorage.getItem("resData"));
+  const token = localData?.access_token;
   if (token) {
     config.headers["Authorization"] = token;
   }

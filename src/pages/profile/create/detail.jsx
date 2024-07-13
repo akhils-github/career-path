@@ -12,6 +12,7 @@ import VisaStatus from "../../../components/accounts/VisaStatus";
 import { useImageUploader } from "../../../hooks";
 import { COUNTRIES, newRequest, SAVE_MEMBER } from "../../../api";
 import { useUserStore } from "../../../lib/user";
+import { useNavigate } from "react-router";
 
 export default function ProfileDetail() {
   const { email } = useUserStore((state) => state.user);
@@ -23,7 +24,7 @@ export default function ProfileDetail() {
   const [loader, setLoader] = useState(false);
   const [gender, setGender] = useState("");
   console.log(imageFile);
-
+const navigate =useNavigate()
   const { data: countriesListing } = useQuery({
     queryKey: ["countriesListing"],
     queryFn: () => newRequest.get(COUNTRIES).then((res) => res.data),
@@ -55,19 +56,20 @@ export default function ProfileDetail() {
       // status: data?.,
       // languages: [1, 2],
 
-      gender: data?.gender,
+      gender: gender,
       country: data?.country?.value,
       state: data?.state?.value,
       city: data?.city?.value,
       nationality: data?.nationality?.value,
       mobile_number: data?.mobileNumber,
-      visa_status: data?.visaStatus,
       date_of_birth: data?.dateOfBirth,
       religion: data?.religion?.value,
-      marital_status: data?.maritalStatus,
-      driving_license: data?.isLicense,
       license_issued_from: data?.licenseIssued?.value,
       linkedin_url: data?.linkedin_url,
+
+      visa_status: visaStatus,
+      marital_status: maritalStatus,
+      driving_license: isLicense,
       profile_photo: imageFile,
     };
 
@@ -76,7 +78,7 @@ export default function ProfileDetail() {
       if (res.status == 200) {
         setLoader(false);
         toast.success("Profile Created  sucessfully");
-        // navigate("/profile-detail");
+        navigate("/profile");
         // queryClient.invalidateQueries([""]);
       }
     } catch (error) {

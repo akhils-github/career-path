@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { isFileAllowed } from "../utils/image"
+import toast from "react-hot-toast"
 
 export const useImageUploader = (initialImage = "") => {
   const [image, setImage] = useState(initialImage)
