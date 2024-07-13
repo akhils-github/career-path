@@ -59,7 +59,7 @@ export default function SignIn() {
 
   return (
     <div className="h-screen w-screen flex">
-      <div className="flex-[0.3] relative flex items-center justify-center bg-[#1e3964]">
+      <div className="lex-[0.3]  relative flex items-center justify-center bg-[#1e3964]">
         <div className="relative w-[234px] h-[234px]">
           <img
             className="object-contain h-full w-full"

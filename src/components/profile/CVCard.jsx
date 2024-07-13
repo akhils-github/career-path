@@ -2,6 +2,8 @@ import React from 'react'
 
 export default function CVCard() {
   return (
-    <div>CVCard</div>
+    <div className='bg-white'>
+
+    </div>
   )
 }
