@@ -17,14 +17,21 @@ import { useNavigate } from "react-router";
 export default function ProfileDetail() {
   const { email } = useUserStore((state) => state.user);
   console.log(email);
-  const { image, imageFile, handleImage, removeImage } = useImageUploader();
+  const { image, base64Image, imageFile, handleImage, removeImage } =
+    useImageUploader();
+  // const [base64String, setBase64String] = useState("");
+
   const [visaStatus, setVisaStatus] = useState("");
   const [maritalStatus, setMaritalStatus] = useState("");
   const [isLicense, setIsLicense] = useState("");
   const [loader, setLoader] = useState(false);
   const [gender, setGender] = useState("");
   console.log(imageFile);
-const navigate =useNavigate()
+
+  const navigate = useNavigate();
+
+  console.log(base64Image);
+
   const { data: countriesListing } = useQuery({
     queryKey: ["countriesListing"],
     queryFn: () => newRequest.get(COUNTRIES).then((res) => res.data),
@@ -70,7 +77,7 @@ const navigate =useNavigate()
       visa_status: visaStatus,
       marital_status: maritalStatus,
       driving_license: isLicense,
-      profile_photo: imageFile,
+      profile_photo: base64Image,
     };
 
     try {
