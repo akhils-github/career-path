@@ -1,34 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate, Outlet, useLocation } from "react-router";
 import AccountSideBar from "../components/accounts/SideBar";
+import { useUserStore } from "../lib/user";
+import { decodeToken } from "../utils/tokenValidate";
 
 export default function AccountLayout() {
   const pathName = useLocation();
-  const pathWithoutLayout = pathName?.pathname.includes("sign-up");
-  const decodeToken = () => {
-    let token = localStorage.getItem("access_token");
-    try {
-      const base64Url = token.split(".")[1];
-      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-      const jsonPayload = decodeURIComponent(
-        atob(base64)
-          .split("")
-          .map(function (c) {
-            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-          })
-          .join("")
-      );
-      const decoded = JSON.parse(jsonPayload);
-      const currentTime = Math.floor(Date.now() / 1000);
 
-      return decoded.exp > currentTime;
-    } catch (error) {
-      console.error("Invalid token format", error);
-      return null;
+  const { setUser } = useUserStore((state) => state);
+  let userId = localStorage.getItem("userId");
+  useEffect(() => {
+    if (userId) {
+      setUser(userId);
     }
-    // return JSON.parse(jsonPayload);
-  };
+  }, [userId]);
+
+  const pathWithoutLayout = pathName?.pathname.includes("sign-up");
+
   const isAccess = decodeToken() || pathWithoutLayout;
+  console.log(isAccess);
   return isAccess ? (
     <div className="h-screen w-screen bg-[#F8F9FA] flex">
       <div className="hidden bg-[#1E3964] flex-[0.3] h-full  relative lg:flex items-center justify-center">

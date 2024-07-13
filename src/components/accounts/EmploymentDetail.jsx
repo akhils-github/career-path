@@ -12,11 +12,10 @@ import {
   SUB_INDUSTRIES,
   newRequest,
 } from "../../api";
-import { monthsData } from "../../constants/selectDate";
+import { monthsData, yearsListing } from "../../constants/selectDate";
 
-export default function EmploymentDetail({ register, control }) {
+export default function EmploymentDetail({ register, control,workingStatus, setWorkingStatus }) {
   // GET all INDUSTRIES
-
   const [industries, setIndustries] = useState("");
   const { data: industryListing } = useQuery({
     queryKey: ["industryListing"],
@@ -98,18 +97,33 @@ export default function EmploymentDetail({ register, control }) {
     setCurrency(i);
   };
 
-  // GET all start months
+  // GET all start months and year
   const [startMonths, setStartMonths] = useState("");
   let monthList = monthsData?.map((i) => {
     return { id: i.id, value: i.value, label: i.name };
-  })
+  });
+  console.log(yearsListing);
+  let yearList = yearsListing?.map((i) => {
+    return { id: i, value: i, label: i };
+  });
+  console.log(yearList);
   const handleStartMonths = (i) => {
     setStartMonths(i);
   };
+  // Get all start years
+  const [startYear, setStartYear] = useState("");
+  const handleStartYear = (i) => {
+    setStartYear(i);
+  };
+
   // GET all end months
-  const [endMonths, setEndMonths] = useState("");;
+  const [endMonths, setEndMonths] = useState("");
   const handleEndMonths = (i) => {
     setEndMonths(i);
+  };
+  const [endYear, setEndYear] = useState("");
+  const handleEndYear = (i) => {
+    setEndYear(i);
   };
 
   return (
@@ -348,10 +362,25 @@ export default function EmploymentDetail({ register, control }) {
               Are you currently working here ?
             </label>
             <div className="flex gap-5 items-center">
-              <div className="rounded-full border border-[#808080] w-14 h-8 flex items-center justify-center">
+              <div
+                onClick={() => setWorkingStatus("yes")}
+                className={`rounded-full border cursor-pointer  w-14 h-8 flex items-center justify-center ${
+                  workingStatus === "yes"
+                    ? "border-[#275DF5] text-[#275DF5] bg-[#275DF51C] "
+                    : "border-[#808080]"
+                }`}
+              >
                 Yes
               </div>
-              <div className="rounded-full border border-[#808080] w-56 h-8 flex justify-center items-center ">
+              <div
+                onClick={() => setWorkingStatus("no")}
+                className={`rounded-full cursor-pointer border w-56 h-8 flex justify-center items-center
+                  ${
+                    workingStatus === "no"
+                      ? "border-[#275DF5] text-[#275DF5] bg-[#275DF51C] "
+                      : "border-[#808080]"
+                  }   `}
+              >
                 This is my latest employer
               </div>
             </div>
@@ -395,16 +424,16 @@ export default function EmploymentDetail({ register, control }) {
                   render={({ field }) => (
                     <Select
                       required
-                      // selected={selectedState}
-                      // value={selectedState}
-                      // onChange={(selectedOption) => {
-                      //   handleState(selectedOption);
-                      //   field.onChange(selectedOption);
-                      // }}
+                      selected={startYear}
+                      value={startYear}
+                      onChange={(selectedOption) => {
+                        handleStartYear(selectedOption);
+                        field.onChange(selectedOption);
+                      }}
                       components={{
                         IndicatorSeparator: () => null,
                       }}
-                      // options={stateLists}
+                      options={yearList}
                       isSearchable={true}
                       styles={customSelectStyles}
                       placeholder="Select"
@@ -449,16 +478,16 @@ export default function EmploymentDetail({ register, control }) {
                   render={({ field }) => (
                     <Select
                       required
-                      // selected={selectedState}
-                      // value={selectedState}
-                      // onChange={(selectedOption) => {
-                      //   handleState(selectedOption);
-                      //   field.onChange(selectedOption);
-                      // }}
+                      selected={endYear}
+                      value={endYear}
+                      onChange={(selectedOption) => {
+                        handleEndYear(selectedOption);
+                        field.onChange(selectedOption);
+                      }}
                       components={{
                         IndicatorSeparator: () => null,
                       }}
-                      // options={stateLists}
+                      options={yearList}
                       isSearchable={true}
                       styles={customSelectStyles}
                       placeholder="Select"
@@ -499,30 +528,10 @@ export default function EmploymentDetail({ register, control }) {
                   />
                 )}
               />
-              <Controller
-                name="state"
-                control={control}
-                defaultValue=""
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <Select
-                    required
-                    // selected={selectedState}
-                    // value={selectedState}
-                    // onChange={(selectedOption) => {
-                    //   handleState(selectedOption);
-                    //   field.onChange(selectedOption);
-                    // }}
-                    components={{
-                      IndicatorSeparator: () => null,
-                    }}
-                    // options={stateLists}
-                    isSearchable={true}
-                    styles={customSelectStyles}
-                    placeholder="Select"
-                    className="rounded border border-[#C7C7C7] w-full focus:border-[#2E2E2E] text-sm border-opacity-60 h-10 text-zinc-500"
-                  />
-                )}
+              <input
+                type="text"
+                className="input-box"
+                {...register("monthlySalary", { required: true })}
               />
             </div>
           </div>

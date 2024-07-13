@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
 import { customSelectStyles } from "../../utils/customStyles";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { yearsListing } from "../../constants/selectDate";
 
-export default function EducationDetail() {
+export default function EducationDetail({ loader }) {
   const { register, control } = useForm();
+  // year listing
+  let yearList = yearsListing?.map((i) => {
+    return { id: i, value: i, label: i };
+  });
+  const [selectedYear, setSelectedYear] = useState("");
+  const handleYear = (i) => {
+    setSelectedYear(i);
+  };
 
   return (
     <div className="bg-white px-8 py-6">
@@ -17,7 +26,7 @@ export default function EducationDetail() {
           colorful!
         </p>
       </div>
-      <form className="flex flex-col gap-y-4 max-w-2xl">
+      <div className="flex flex-col gap-y-4 max-w-2xl">
         <div className="flex px-3 group flex-col space-y-2">
           <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
             Course
@@ -29,7 +38,7 @@ export default function EducationDetail() {
             rules={{ required: true }}
             render={({ field }) => (
               <Select
-                required
+                // required
                 // selected={selectedState}
                 // value={selectedState}
                 // onChange={(selectedOption) => {
@@ -65,7 +74,7 @@ export default function EducationDetail() {
             rules={{ required: true }}
             render={({ field }) => (
               <Select
-                required
+                // required
                 // selected={selectedState}
                 // value={selectedState}
                 // onChange={(selectedOption) => {
@@ -101,7 +110,7 @@ export default function EducationDetail() {
             rules={{ required: true }}
             render={({ field }) => (
               <Select
-                required
+                // required
                 // selected={selectedState}
                 // value={selectedState}
                 // onChange={(selectedOption) => {
@@ -144,23 +153,23 @@ export default function EducationDetail() {
             Passing Year
           </label>
           <Controller
-            name="state"
+            name="passingYear"
             control={control}
             defaultValue=""
             rules={{ required: true }}
             render={({ field }) => (
               <Select
-                required
-                // selected={selectedState}
-                // value={selectedState}
-                // onChange={(selectedOption) => {
-                //   handleState(selectedOption);
-                //   field.onChange(selectedOption);
-                // }}
+                // required
+                selected={selectedYear}
+                value={selectedYear}
+                onChange={(selectedOption) => {
+                  handleYear(selectedOption);
+                  field.onChange(selectedOption);
+                }}
                 components={{
                   IndicatorSeparator: () => null,
                 }}
-                // options={stateLists}
+                options={yearList}
                 isSearchable={true}
                 styles={customSelectStyles}
                 placeholder="Select"
@@ -175,14 +184,20 @@ export default function EducationDetail() {
       )} */}
                     
         </div>
-        <Link
-          to={"/profile-detail"}
-          className="bg-[#1E3964] mt-4 h-10 w-fit rounded-full text-sm px-3 flex items-center text-white gap-2 "
-        >
-          <p>Great Start. Move to the next step!</p>
-          <ArrowRight className="size-5" />
-        </Link>
-      </form>
+        <button className="bg-[#1E3964] w-72 mt-4 h-10  rounded-full text-sm px-1.5 justify-center flex items-center text-white gap-2 ">
+          {loader ? (
+            <div className="flex items-center gap-3">
+              <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
+              creating please wait...
+            </div>
+          ) : (
+            <>
+              <p>Great Start. Move to the next step!</p>
+              <ArrowRight className="size-5" />
+            </>
+          )}
+        </button>
+      </div>
     </div>
   );
 }

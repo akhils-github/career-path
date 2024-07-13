@@ -12,3 +12,9 @@ export const monthsData = [
   { id: 11, value: "November", name: "November" },
   { id: 12, value: "December", name: "December" },
 ];
+
+const currentYear = new Date().getFullYear();
+export const yearsListing = Array.from(
+  new Array(50),
+  (val, index) => currentYear - index
+);

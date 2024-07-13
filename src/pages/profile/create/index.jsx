@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import toast from "react-hot-toast";
 
 import ProfileProgress from "../../../components/accounts/ProfileProgress";
 import EmploymentDetail from "../../../components/accounts/EmploymentDetail";
 import EducationDetail from "../../../components/accounts/Education";
-import { newFormRequest } from "../../../api";
+import { newFormRequest, newRequest, PROFILE_CREATE } from "../../../api";
+import { useUserStore } from "../../../lib/user";
+import { useNavigate } from "react-router";
 
 export default function ProfileCreate() {
+  const [loader, setLoader] = useState(false);
+  const [workingStatus, setWorkingStatus] = useState("");
+  const navigate = useNavigate();
+  const { userId } = useUserStore((state) => state);
+  console.log(userId);
   const {
     register,
     handleSubmit,
@@ -24,37 +31,54 @@ export default function ProfileCreate() {
   };
 
   const handleProfileCreate = async (data) => {
+    console.log(data);
     const formData = {
       employer_details: {
-        designation: "Software Engineer",
-        employer_name: "WIPRO",
-        employer_country: 1,
-        employer_state: 1,
-        working_status: "yes",
-        start_month: "January",
-        start_year: 2020,
-        end_month: "December",
-        end_year: 2022,
-        currency: 1,
-        monthly_salary: 5000,
-        member: 1,
+        designation: data?.designation,
+        employer_name: data?.employerName,
+        employer_country: data?.country?.id,
+        employer_state: data?.state?.id,
+        working_status: workingStatus,
+        start_month: data?.startMonth?.value,
+        start_year: data?.startYear?.value,
+        end_month: data?.endMonth?.value,
+        end_year: data?.endYear?.value,
+        currency: data?.currency?.id,
+        monthly_salary: data?.monthlySalary,
+        member: userId,
       },
-      profile: {},
-      // education:{
+      profile: {
+        profile_heading: data?.profileHeading,
+        industry: data?.industry?.value,
+        sub_industry: data?.subIndustry?.value,
+        function_area: data?.functionalArea?.value,
+        skills: data?.skills,
+        member: userId,
+      },
+      education: [
+        {
+          highest_qualification: "",
+          course: 1,
+          specialization: 1,
+          university: 1,
+          education_location: 1,
+          passing_year: data?.passingYear?.value,
+        },
+      ],
     };
 
     try {
-      const res = await newFormRequest.post(CUSTOMER, formData);
+      const res = await newRequest.post(PROFILE_CREATE, formData);
       if (res.status == 200) {
         setLoader(false);
         toast.success("Profile Created  sucessfully");
-        // navigate("/customer");
+        navigate("/profile-detail");
         // queryClient.invalidateQueries([""]);
       }
     } catch (error) {
       setLoader(false);
       if (error.response.status === 422) {
-        toast.error("Customer already exists");
+        toast.error("already exists");
       }
       console.error(error);
     }
@@ -65,8 +89,14 @@ export default function ProfileCreate() {
       className="px-16 py-8 mx-auto flex flex-col gap-y-6"
     >
       <ProfileProgress status={10} />
-      <EmploymentDetail register={register} control={control} errors={errors} />
-      <EducationDetail />
+      <EmploymentDetail
+        register={register}
+        control={control}
+        errors={errors}
+        setWorkingStatus={setWorkingStatus}
+        workingStatus={workingStatus}
+      />
+      <EducationDetail loader={loader} />
     </form>
   );
 }
