@@ -7,6 +7,7 @@ import { decodeToken } from "../utils/tokenValidate";
 export default function AccountLayout() {
   const pathName = useLocation();
   let user = JSON.parse(localStorage.getItem("resData"));
+  const pathWithoutLayout = pathName?.pathname.includes("sign-up");
   const isAccess = decodeToken(user?.access_token) || pathWithoutLayout;
 console.log(isAccess)
   const { setUser } = useUserStore((state) => state);
@@ -16,7 +17,6 @@ console.log(isAccess)
     }
   }, [isAccess]);
 
-  const pathWithoutLayout = pathName?.pathname.includes("sign-up");
 
   console.log(isAccess);
   return isAccess ? (
