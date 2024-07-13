@@ -3,12 +3,20 @@ import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
 import { customSelectStyles } from "../../utils/customStyles";
 import { useQuery } from "@tanstack/react-query";
-import { INDUSTRIES, SUB_INDUSTRIES, newRequest } from "../../api";
+import {
+  COUNTRIES,
+  CURRENCIES,
+  FUNCTIONAL_AREAS,
+  INDUSTRIES,
+  STATES,
+  SUB_INDUSTRIES,
+  newRequest,
+} from "../../api";
+import { monthsData } from "../../constants/selectDate";
 
-export default function EmploymentDetail() {
-  const { register, control } = useForm();
-
+export default function EmploymentDetail({ register, control }) {
   // GET all INDUSTRIES
+
   const [industries, setIndustries] = useState("");
   const { data: industryListing } = useQuery({
     queryKey: ["industryListing"],
@@ -35,6 +43,74 @@ export default function EmploymentDetail() {
   const handleSubIndustry = (i) => {
     setSubIndustries(i);
   };
+  // GET all FUNCTIONAL_AREAS
+  const [functionalArea, setFunctionalArea] = useState("");
+  const { data: functionalAreaListing } = useQuery({
+    queryKey: ["functionalAreaListing"],
+    queryFn: () => newRequest.get(FUNCTIONAL_AREAS).then((res) => res.data),
+  });
+  console.log(functionalAreaListing);
+  let functionalAreaList = functionalAreaListing?.map((i) => {
+    return { id: i.id, value: i.id, label: i.name };
+  });
+  const handleFunctionalArea = (i) => {
+    setFunctionalArea(i);
+  };
+
+  // GET all Countries
+
+  const [countries, setCountries] = useState("");
+  const { data: countriesListing } = useQuery({
+    queryKey: ["countriesListing"],
+    queryFn: () => newRequest.get(COUNTRIES).then((res) => res.data),
+  });
+
+  let countriesList = countriesListing?.map((i) => {
+    return { id: i.id, value: i.id, label: i.name };
+  });
+  const handleCountries = (i) => {
+    setCountries(i);
+  };
+  // GET all States
+  const [states, setStates] = useState("");
+  const { data: statesListing } = useQuery({
+    queryKey: ["statesListing"],
+    queryFn: () => newRequest.get(STATES).then((res) => res.data),
+  });
+
+  let statesList = statesListing?.map((i) => {
+    return { id: i.id, value: i.id, label: i.name };
+  });
+  const handleStates = (i) => {
+    setStates(i);
+  };
+  // GET all currency
+  const [currency, setCurrency] = useState("");
+  const { data: currencyListing } = useQuery({
+    queryKey: ["currencyListing"],
+    queryFn: () => newRequest.get(CURRENCIES).then((res) => res.data),
+  });
+
+  let currencyList = currencyListing?.map((i) => {
+    return { id: i.id, value: i.id, label: i.name };
+  });
+  const handleCurrency = (i) => {
+    setCurrency(i);
+  };
+
+  // GET all start months
+  const [startMonths, setStartMonths] = useState("");
+  let monthList = monthsData?.map((i) => {
+    return { id: i.id, value: i.value, label: i.name };
+  })
+  const handleStartMonths = (i) => {
+    setStartMonths(i);
+  };
+  // GET all end months
+  const [endMonths, setEndMonths] = useState("");;
+  const handleEndMonths = (i) => {
+    setEndMonths(i);
+  };
 
   return (
     <>
@@ -43,9 +119,8 @@ export default function EmploymentDetail() {
         <p>Give a small description to explain you better.</p>
         <input
           type="text"
-          name=""
-          id=""
           className="input-box"
+          {...register("profileHeading", { required: true })}
           placeholder="Budling Designer in construction / Civil Engineering with 4 years experience"
         />
       </div>
@@ -99,7 +174,7 @@ export default function EmploymentDetail() {
               Sub-Industry
             </label>
             <Controller
-              name="state"
+              name="subIndustry"
               control={control}
               defaultValue=""
               rules={{ required: true }}
@@ -135,23 +210,23 @@ export default function EmploymentDetail() {
               Functional Area
             </label>
             <Controller
-              name="state"
+              name="functionalArea"
               control={control}
               defaultValue=""
               rules={{ required: true }}
               render={({ field }) => (
                 <Select
                   required
-                  // selected={selectedState}
-                  // value={selectedState}
-                  // onChange={(selectedOption) => {
-                  //   handleState(selectedOption);
-                  //   field.onChange(selectedOption);
-                  // }}
+                  selected={functionalArea}
+                  value={functionalArea}
+                  onChange={(selectedOption) => {
+                    handleFunctionalArea(selectedOption);
+                    field.onChange(selectedOption);
+                  }}
                   components={{
                     IndicatorSeparator: () => null,
                   }}
-                  // options={stateLists}
+                  options={functionalAreaList}
                   isSearchable={true}
                   styles={customSelectStyles}
                   placeholder="Select"
@@ -170,7 +245,11 @@ export default function EmploymentDetail() {
             <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
               Designation
             </label>
-            <input type="text" className="input-box" />
+            <input
+              type="text"
+              className="input-box"
+              {...register("designation", { required: true })}
+            />
             {/* {errors.state && (
             <span className="text-xs font-medium text-red-500">
               {errors.state?.message}
@@ -183,7 +262,11 @@ export default function EmploymentDetail() {
             <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
               Employer Name
             </label>
-            <input type="text" className="input-box" />
+            <input
+              type="text"
+              className="input-box"
+              {...register("employerName", { required: true })}
+            />
             {/* {errors.state && (
             <span className="text-xs font-medium text-red-500">
               {errors.state?.message}
@@ -193,30 +276,30 @@ export default function EmploymentDetail() {
           </div>
           <div className="flex px-3 group flex-col space-y-2">
             <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
-              Functional Area
+              Employer Location
             </label>
             <div className="grid grid-cols-2 gap-6 ">
               <Controller
-                name="state"
+                name="country"
                 control={control}
                 defaultValue=""
                 rules={{ required: true }}
                 render={({ field }) => (
                   <Select
                     required
-                    // selected={selectedState}
-                    // value={selectedState}
-                    // onChange={(selectedOption) => {
-                    //   handleState(selectedOption);
-                    //   field.onChange(selectedOption);
-                    // }}
+                    selected={countries}
+                    value={countries}
+                    onChange={(selectedOption) => {
+                      handleCountries(selectedOption);
+                      field.onChange(selectedOption);
+                    }}
                     components={{
                       IndicatorSeparator: () => null,
                     }}
-                    // options={stateLists}
+                    options={countriesList}
                     isSearchable={true}
                     styles={customSelectStyles}
-                    placeholder="Select"
+                    placeholder="Country"
                     className="rounded border border-[#C7C7C7] w-full focus:border-[#2E2E2E] text-sm border-opacity-60 h-10 text-zinc-500"
                   />
                 )}
@@ -234,19 +317,19 @@ export default function EmploymentDetail() {
                 render={({ field }) => (
                   <Select
                     required
-                    // selected={selectedState}
-                    // value={selectedState}
-                    // onChange={(selectedOption) => {
-                    //   handleState(selectedOption);
-                    //   field.onChange(selectedOption);
-                    // }}
+                    selected={states}
+                    value={states}
+                    onChange={(selectedOption) => {
+                      handleStates(selectedOption);
+                      field.onChange(selectedOption);
+                    }}
                     components={{
                       IndicatorSeparator: () => null,
                     }}
-                    // options={stateLists}
+                    options={statesList}
                     isSearchable={true}
                     styles={customSelectStyles}
-                    placeholder="Select"
+                    placeholder="State"
                     className="rounded border border-[#C7C7C7] w-full focus:border-[#2E2E2E] text-sm border-opacity-60 h-10 text-zinc-500"
                   />
                 )}
@@ -275,28 +358,28 @@ export default function EmploymentDetail() {
           </div>
           <div className="flex px-3 group flex-col space-y-2">
             <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
-              Are you currently working here ?
+              Working Period
             </label>
             <div className="grid grid-cols-9  gap-2 items-center w-full">
               <div className="flex gap-3 col-span-4">
                 <Controller
-                  name="state"
+                  name="startMonth"
                   control={control}
                   defaultValue=""
                   rules={{ required: true }}
                   render={({ field }) => (
                     <Select
                       required
-                      // selected={selectedState}
-                      // value={selectedState}
-                      // onChange={(selectedOption) => {
-                      //   handleState(selectedOption);
-                      //   field.onChange(selectedOption);
-                      // }}
+                      selected={startMonths}
+                      value={startMonths}
+                      onChange={(selectedOption) => {
+                        handleStartMonths(selectedOption);
+                        field.onChange(selectedOption);
+                      }}
                       components={{
                         IndicatorSeparator: () => null,
                       }}
-                      // options={stateLists}
+                      options={monthList}
                       isSearchable={true}
                       styles={customSelectStyles}
                       placeholder="Select"
@@ -305,7 +388,7 @@ export default function EmploymentDetail() {
                   )}
                 />
                 <Controller
-                  name="state"
+                  name="startYear"
                   control={control}
                   defaultValue=""
                   rules={{ required: true }}
@@ -334,23 +417,23 @@ export default function EmploymentDetail() {
               <p className="text-center">To</p>
               <div className="flex gap-2 col-span-4">
                 <Controller
-                  name="state"
+                  name="endMonth"
                   control={control}
                   defaultValue=""
                   rules={{ required: true }}
                   render={({ field }) => (
                     <Select
                       required
-                      // selected={selectedState}
-                      // value={selectedState}
-                      // onChange={(selectedOption) => {
-                      //   handleState(selectedOption);
-                      //   field.onChange(selectedOption);
-                      // }}
+                      selected={endMonths}
+                      value={endMonths}
+                      onChange={(selectedOption) => {
+                        handleEndMonths(selectedOption);
+                        field.onChange(selectedOption);
+                      }}
                       components={{
                         IndicatorSeparator: () => null,
                       }}
-                      // options={stateLists}
+                      options={monthList}
                       isSearchable={true}
                       styles={customSelectStyles}
                       placeholder="Select"
@@ -359,7 +442,7 @@ export default function EmploymentDetail() {
                   )}
                 />
                 <Controller
-                  name="state"
+                  name="endYear"
                   control={control}
                   defaultValue=""
                   rules={{ required: true }}
@@ -388,27 +471,27 @@ export default function EmploymentDetail() {
           </div>
           <div className="flex px-3 group flex-col space-y-2">
             <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
-              Are you currently working here ?
+              Monthly Salary
             </label>
             <div className="grid grid-cols-2 gap-4 items-center">
               <Controller
-                name="state"
+                name="currency"
                 control={control}
                 defaultValue=""
                 rules={{ required: true }}
                 render={({ field }) => (
                   <Select
                     required
-                    // selected={selectedState}
-                    // value={selectedState}
-                    // onChange={(selectedOption) => {
-                    //   handleState(selectedOption);
-                    //   field.onChange(selectedOption);
-                    // }}
+                    selected={currency}
+                    value={currency}
+                    onChange={(selectedOption) => {
+                      handleCurrency(selectedOption);
+                      field.onChange(selectedOption);
+                    }}
                     components={{
                       IndicatorSeparator: () => null,
                     }}
-                    // options={stateLists}
+                    options={currencyList}
                     isSearchable={true}
                     styles={customSelectStyles}
                     placeholder="Select"
@@ -454,6 +537,7 @@ export default function EmploymentDetail() {
         <input
           type="text"
           className="input-box"
+          {...register("skills", { required: true })}
           placeholder="Budling Designer in construction / Civil Engineering with 4 years experience"
         />
       </div>

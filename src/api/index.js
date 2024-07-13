@@ -23,8 +23,8 @@ export const XFormRequest = axios.create({
 export const newRequest = axios.create({
   ...baseConfig,
   headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json",
+    // "Access-Control-Allow-Origin": "*",
+    // "Content-Type": "application/json",
   },
 });
 
@@ -42,6 +42,10 @@ export const LOGIN = "users/login/";
 export const REGISTER_USER = "users/register/";
 export const INDUSTRIES = "users/industries/";
 export const SUB_INDUSTRIES = "users/sub-industries/";
+export const COUNTRIES = "users/countries";
+export const STATES = "users/states";
+export const FUNCTIONAL_AREAS = "users/function-areas";
+export const CURRENCIES = "users/currencies";
 
 newRequest.interceptors.request.use((config) => {
   const token = localStorage.getItem("access_token");
