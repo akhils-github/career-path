@@ -30,9 +30,6 @@ export const useImageUploader = (initialImage = "") => {
     setImageFile(selectedFile);
   };
 
-  // const handleFileChange = (event) => {
-  // const file = event;
-  // const file = event.target.files[0];
   useEffect(() => {
     const convertImageToBase64 = (imageFile, callback) => {
       const reader = new FileReader();
@@ -44,14 +41,13 @@ export const useImageUploader = (initialImage = "") => {
       };
       reader.readAsDataURL(imageFile);
     };
-    
+
     if (imageFile) {
       convertImageToBase64(imageFile, (base64String) => {
         // console.log(base64String);
         setBase64Image(base64String);
       });
     }
-
   }, [image]);
 
   // handleFileChange(imageFile);
