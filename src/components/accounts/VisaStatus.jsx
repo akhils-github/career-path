@@ -291,43 +291,45 @@ export default function VisaStatus(props) {
             </div>
           </div>
         </div>
-
-        <div className="flex px-3 group flex-col space-y-2">
-          <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
-            Driving License issued from
-          </label>
-          <Controller
-            name="licenseIssued"
-            control={control}
-            defaultValue=""
-            rules={{ required: true }}
-            render={({ field }) => (
-              <Select
-                required
-                selected={countries}
-                value={countries}
-                onChange={(selectedOption) => {
-                  handleCountries(selectedOption);
-                  field.onChange(selectedOption);
-                }}
-                components={{
-                  IndicatorSeparator: () => null,
-                }}
-                options={countriesList}
-                isSearchable={true}
-                styles={customSelectStyles}
-                placeholder="Select"
-                className="rounded border border-[#C7C7C7] w-full focus:border-[#2E2E2E] text-sm border-opacity-60 h-10 text-zinc-500"
-              />
-            )}
-          />
-          {/* {errors.state && (
+        {isLicense === "yes" && (
+          <div className="flex px-3 group flex-col space-y-2">
+            <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
+              Driving License issued from
+            </label>
+            <Controller
+              name="licenseIssued"
+              control={control}
+              defaultValue=""
+              rules={{ required: false }}
+              render={({ field }) => (
+                <Select
+                  // required
+                  selected={countries}
+                  value={countries}
+                  onChange={(selectedOption) => {
+                    handleCountries(selectedOption);
+                    field.onChange(selectedOption);
+                  }}
+                  components={{
+                    IndicatorSeparator: () => null,
+                  }}
+                  options={countriesList}
+                  isSearchable={true}
+                  styles={customSelectStyles}
+                  placeholder="Select"
+                  className="rounded border border-[#C7C7C7] w-full focus:border-[#2E2E2E] text-sm border-opacity-60 h-10 text-zinc-500"
+                />
+              )}
+            />
+            {/* {errors.state && (
     <span className="text-xs font-medium text-red-500">
       {errors.state?.message}
     </span>
   )} */}
-                               
-        </div>
+                                 
+          </div>
+        )}
+
         <div className="flex px-3 group flex-col space-y-2">
           <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
             LinkedIn URL
@@ -345,6 +347,7 @@ export default function VisaStatus(props) {
                                
         </div>
       </div>
+
       <div className="flex gap-3 items-baseline">
         <button className="bg-[#1E3964] w-44 mt-4 h-10  rounded-full text-sm px-1.5 justify-center flex items-center text-white gap-2 ">
           {loader ? (
