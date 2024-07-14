@@ -14,7 +14,12 @@ import {
 } from "../../api";
 import { monthsData, yearsListing } from "../../constants/selectDate";
 
-export default function EmploymentDetail({ register, control,workingStatus, setWorkingStatus }) {
+export default function EmploymentDetail({
+  register,
+  control,
+  workingStatus,
+  setWorkingStatus,
+}) {
   // GET all INDUSTRIES
   const [industries, setIndustries] = useState("");
   const { data: industryListing } = useQuery({
@@ -365,9 +370,7 @@ export default function EmploymentDetail({ register, control,workingStatus, setW
               <div
                 onClick={() => setWorkingStatus("yes")}
                 className={`rounded-full border cursor-pointer  w-14 h-8 flex items-center justify-center ${
-                  workingStatus === "yes"
-                    ? "active-option"
-                    : "border-[#808080]"
+                  workingStatus === "yes" ? "active-option" : "border-[#808080]"
                 }`}
               >
                 Yes
@@ -442,60 +445,63 @@ export default function EmploymentDetail({ register, control,workingStatus, setW
                   )}
                 />
               </div>
-
-              <p className="text-center">To</p>
-              <div className="flex gap-2 col-span-4">
-                <Controller
-                  name="endMonth"
-                  control={control}
-                  defaultValue=""
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <Select
-                      required
-                      selected={endMonths}
-                      value={endMonths}
-                      onChange={(selectedOption) => {
-                        handleEndMonths(selectedOption);
-                        field.onChange(selectedOption);
-                      }}
-                      components={{
-                        IndicatorSeparator: () => null,
-                      }}
-                      options={monthList}
-                      isSearchable={true}
-                      styles={customSelectStyles}
-                      placeholder="Select"
-                      className="rounded border border-[#C7C7C7] w-40 focus:border-[#2E2E2E] text-sm border-opacity-60 h-10 text-zinc-500"
+              {workingStatus === "no" && (
+                <>
+                  <p className="text-center">To</p>
+                  <div className="flex gap-2 col-span-4">
+                    <Controller
+                      name="endMonth"
+                      control={control}
+                      defaultValue=""
+                      rules={{ required: false }}
+                      render={({ field }) => (
+                        <Select
+                          // required
+                          selected={endMonths}
+                          value={endMonths}
+                          onChange={(selectedOption) => {
+                            handleEndMonths(selectedOption);
+                            field.onChange(selectedOption);
+                          }}
+                          components={{
+                            IndicatorSeparator: () => null,
+                          }}
+                          options={monthList}
+                          isSearchable={true}
+                          styles={customSelectStyles}
+                          placeholder="Select"
+                          className="rounded border border-[#C7C7C7] w-40 focus:border-[#2E2E2E] text-sm border-opacity-60 h-10 text-zinc-500"
+                        />
+                      )}
                     />
-                  )}
-                />
-                <Controller
-                  name="endYear"
-                  control={control}
-                  defaultValue=""
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <Select
-                      required
-                      selected={endYear}
-                      value={endYear}
-                      onChange={(selectedOption) => {
-                        handleEndYear(selectedOption);
-                        field.onChange(selectedOption);
-                      }}
-                      components={{
-                        IndicatorSeparator: () => null,
-                      }}
-                      options={yearList}
-                      isSearchable={true}
-                      styles={customSelectStyles}
-                      placeholder="Select"
-                      className="rounded border border-[#C7C7C7] w-40 focus:border-[#2E2E2E] text-sm border-opacity-60 h-10 text-zinc-500"
+                    <Controller
+                      name="endYear"
+                      control={control}
+                      defaultValue=""
+                      rules={{ required: false }}
+                      render={({ field }) => (
+                        <Select
+                          // required
+                          selected={endYear}
+                          value={endYear}
+                          onChange={(selectedOption) => {
+                            handleEndYear(selectedOption);
+                            field.onChange(selectedOption);
+                          }}
+                          components={{
+                            IndicatorSeparator: () => null,
+                          }}
+                          options={yearList}
+                          isSearchable={true}
+                          styles={customSelectStyles}
+                          placeholder="Select"
+                          className="rounded border border-[#C7C7C7] w-40 focus:border-[#2E2E2E] text-sm border-opacity-60 h-10 text-zinc-500"
+                        />
+                      )}
                     />
-                  )}
-                />
-              </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
           <div className="flex px-3 group flex-col space-y-2">

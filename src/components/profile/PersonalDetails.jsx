@@ -2,12 +2,12 @@ import React from "react";
 
 export default function PersonalDetails() {
   return (
-    <div className="mt-4 pt-4 bg-white mb-4 pb-6 rounded-md">
+    <div className=" bg-white  rounded-md px-4 py-3">
       <div>
         <div className="flex justify-between">
           <div className="flex gap-4">
-            <div className="w-12 px-2">
-              <img src="/images/employment.png" alt="" />
+            <div className="bg-[#1F69FF66] rounded-full size-12 flex items-center justify-center">
+              Icon
             </div>
             <div>
               <h3 className="font-bold pb-4">Personal Details</h3>
@@ -24,13 +24,15 @@ export default function PersonalDetails() {
             </button>
           </div>
         </div>
-        <div className="mt-4 mr-5 ml-16 pt-4 rounded-md">
+
+        <div className="rounded-md pl-20">
           {/* <div className="flex justify-between"> */}
-          <div className="grid grid-cols-4 gap-8">
+          <div className="grid grid-cols-4 gap-x-4 gap-y-6">
             <div className=" ">
               <p className="text-sm">Date of Birth</p>
               <p>August 17, 1997</p>
             </div>
+
             <div className="">
               <p className="text-sm">Gender</p>
               <p>Male</p>
@@ -73,7 +75,7 @@ export default function PersonalDetails() {
             </div>
             <div className="">
               <p className="text-sm">Alternate Contact Number</p>
-              <p>=324 - 123456789908</p>
+              <p>+324 - 123456789908</p>
             </div>
             <div>
               <p className="text-sm">LinkedIn URL</p>

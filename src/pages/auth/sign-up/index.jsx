@@ -14,6 +14,7 @@ export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
+  const [experience, setExperience] = useState("");
 
   const {
     register,
@@ -142,10 +143,20 @@ export default function SignUp() {
               What is your experience level?
             </label>
             <div className="flex gap-3 text-sm font-medium">
-              <span className="px-3 border rounded-full py-0.5">
+              <span
+                onClick={() => setExperience("experience")}
+                className={`${
+                  experience === "experience" && "active-option "
+                } px-3 border rounded-full py-0.5 cursor-pointer`}
+              >
                 I have work experience
               </span>
-              <span className="px-3 border rounded-full py-0.5">
+              <span
+                onClick={() => setExperience("fresher")}
+                className={`${
+                  experience === "fresher" && "active-option"
+                } px-3 border rounded-full py-0.5 cursor-pointer`}
+              >
                 I am a fresher
               </span>
             </div>
