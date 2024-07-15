@@ -93,7 +93,6 @@ export default function SignUp() {
             <input
               autoComplete="off"
               type="text"
-              disable={false}
               placeholder="Enter your personal Email ID"
               {...register("email")}
               className="rounded-md border border-[#C7C7C7] w-full px-2 focus:border-[#2E2E2E] text-sm border-opacity-60 h-8 text-zinc-500"
@@ -196,7 +195,7 @@ export default function SignUp() {
             </span>
           </div>
 
-          <button className="bg-[#1E3964] m h-8 w-48 rounded-full text-sm  flex  justify-center items-center text-white gap-2 ">
+          <button  className="bg-[#1E3964] m h-8 w-48 rounded-full text-sm  flex  justify-center items-center text-white gap-2 ">
             {loader ? (
               <div className="flex items-center gap-3">
                 <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
