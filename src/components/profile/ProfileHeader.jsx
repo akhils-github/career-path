@@ -2,7 +2,8 @@ import { Camera } from "lucide-react";
 import React from "react";
 import { Link } from "react-router-dom";
 // import Tick from "/images/profile/tick-circle.svg";
-export default function ProfileHeader() {
+export default function ProfileHeader({ userData }) {
+  console.log(userData);
   return (
     <div className="w-full">
       <div className="-mt-12 overflow-y-min mx-auto rounded ">
@@ -23,18 +24,23 @@ export default function ProfileHeader() {
           </div>
           <div className="bg-[#275DF51A] flex flex-col px-5 pt-2 rounded w-[85%]">
             <div>
-              <h3>Forrest Gump</h3>
-              <p>Graphic Designer at Ghd Global</p>
+              <h3>
+                {userData?.first_name} {userData?.middle_name}
+                {userData?.last_name}
+              </h3>
+              {/* <p> {userData?.state}</p> */}
             </div>
             <div className="flex gap-2">
               <div>
-                <p>Sadasd, Bahrain</p>
+                <p>
+                  {/* {userData?.state}, {userData?.country} */}
+                </p>
               </div>
               <div>
-                <p>walapa@getmola.com</p>
+                <p>{userData?.email}</p>
               </div>
               <div>
-                <p>+2343 - 453453453</p>
+                <p>{userData?.mobile_number}</p>
               </div>
             </div>
           </div>

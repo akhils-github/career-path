@@ -151,6 +151,7 @@ export default function VisaStatus(props) {
             rules={{ required: true }}
             render={({ field }) => (
               <Select
+              isMulti
                 required
                 selected={languages}
                 value={languages}

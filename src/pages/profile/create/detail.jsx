@@ -54,6 +54,7 @@ export default function ProfileDetail() {
 
   console.log(errors);
   const handleProfileCreate = async (data) => {
+    const languageIds = data?.languages?.map((item) => item.id);
     console.log(data);
     const formData = {
       first_name: data?.firstName,
@@ -61,7 +62,7 @@ export default function ProfileDetail() {
       email: email,
       // role_type: data?.,
       // status: data?.,
-      // languages: [1, 2],
+      languages: languageIds,
 
       gender: gender,
       country: data?.country?.value,
@@ -82,7 +83,7 @@ export default function ProfileDetail() {
 
     try {
       const res = await newRequest.post(SAVE_MEMBER, formData);
-      if (res.status == 200) {
+      if (res.success) {
         setLoader(false);
         toast.success("Profile Created  sucessfully");
         navigate("/profile");

@@ -56,10 +56,12 @@ export const LANGUAGES = "users/languages/";
 export const RELIGION = "users/religions/";
 export const SAVE_MEMBER = "users/save_member/";
 
+export const GET_PROFILES = "users/profile/";
+
 newRequest.interceptors.request.use((config) => {
   const localData = JSON.parse(localStorage.getItem("resData"));
   const token = localData?.access_token;
-  console.log(token)
+  console.log(token);
   if (token) {
     config.headers["Authorization"] = token;
   }
