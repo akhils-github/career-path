@@ -30,6 +30,7 @@ export default function EmploymentDetail({
   let industryList = industryListing?.map((i) => {
     return { id: i.id, value: i.id, label: i.name };
   });
+
   const handleIndustry = (i) => {
     setIndustries(i);
   };
@@ -151,7 +152,7 @@ export default function EmploymentDetail({
             colorful!
           </p>
         </div>
-        <form className="flex flex-col gap-y-4 max-w-2xl">
+        <div className="flex flex-col gap-y-4 max-w-2xl">
           <div className="flex px-3 group flex-col space-y-2">
             <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
               Industry
@@ -541,7 +542,7 @@ export default function EmploymentDetail({
               />
             </div>
           </div>
-        </form>
+        </div>
       </div>
       <div className=" bg-white my-2 px-8 py-6 flex flex-col gap-2 rounded">
         <h5 className="heading">Key Professional Skills</h5>
