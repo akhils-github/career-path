@@ -20,7 +20,8 @@ export default function ProfileDetailView() {
     queryKey: ["profileListing"],
     queryFn: () => newRequest.get(GET_PROFILES).then((res) => res.data),
   });
-
+const {profile } = profileListing ?? {}
+console.log(profile)
   console.log(profileListing);
   return (
     <div className="flex flex-col gap-4">
@@ -28,8 +29,8 @@ export default function ProfileDetailView() {
       <NavItems />
       <div className="flex gap-x-5">
         <div className="flex-[0.7] flex flex-col gap-4  ">
-          <CVHeadline />
-          <KeySkills />
+          <CVHeadline profile={profile} />
+          <KeySkills profile={profile} />
           <Summary />
           <Employment />
           <ITSkills />

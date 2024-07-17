@@ -24,22 +24,27 @@ export default function ProfileHeader({ userData }) {
           </div>
           <div className="bg-[#275DF51A] flex flex-col px-5 pt-2 rounded w-[85%]">
             <div>
-              <h3>
+              <h3 className="font-semibold text-lg">
+                {console.log(userData?.first_name)}
                 {userData?.first_name} {userData?.middle_name}
                 {userData?.last_name}
               </h3>
-              {/* <p> {userData?.state}</p> */}
+              <p>
+                {" "}
+                {userData?.profile?.employer_details?.designation}
+              </p>
             </div>
-            <div className="flex gap-2">
-              <div>
-                <p>
-                  {/* {userData?.state}, {userData?.country} */}
-                </p>
+            <div className="flex  gap-6 items-center mt-6">
+              <div className="flex gap-1 items-center">
+                <div className="size-8 rounded-full bg-[#FF572266]"></div>
+                <p>{userData?.profile?.employer_details?.employer_country?.name} , {userData?.profile?.employer_details?.employer_state?.name}</p>
               </div>
-              <div>
+              <div className="flex gap-1 items-center">
+                <div className="size-8 rounded-full bg-[#1F69FF66]"></div>
                 <p>{userData?.email}</p>
               </div>
-              <div>
+              <div className="flex gap-1 items-center">
+                <div className="size-8 rounded-full bg-[#30984066]"></div>
                 <p>{userData?.mobile_number}</p>
               </div>
             </div>

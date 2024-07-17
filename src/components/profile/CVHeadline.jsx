@@ -1,11 +1,13 @@
 import { Pen } from "lucide-react";
 import React, { useState } from "react";
 
-export default function CVHeadline() {
+export default function CVHeadline({profile}) {
   const [isEdit, setIsEdit] = useState(false);
+  let {profile_heading}   =  profile ?? {}
+  console.log(profile)
   return (
     <>
-      {isEdit ? (
+      {!isEdit ? (
         <div className="bg-white rounded px-4 h-24 flex justify-between py-2.5">
           <div className="flex gap-4 py-2">
             <div className="bg-[#1F69FF66] rounded-full size-12 flex items-center justify-center">
@@ -14,7 +16,8 @@ export default function CVHeadline() {
             <div>
               <h3>CV Headline</h3>
               <p>
-                Graphic Designer in Construction / Civil Engineering in Sadasd
+                {profile_heading}
+                {/* Graphic Designer in Construction / Civil Engineering in Sadasd */}
               </p>
             </div>
           </div>
@@ -45,7 +48,7 @@ export default function CVHeadline() {
               <div className="flex justify-center items-center text-white bg-[#1E3964] rounded-full w-20 h-8">
                 Save
               </div>
-              <div className="flex justify-center items-center text-[#1E3964] font-medium border-2 border-[#1E3964] rounded-full w-20 h-8">
+              <div onClick={()=>setIsEdit(!isEdit)} className="flex justify-center items-center cursor-pointer text-[#1E3964] font-medium border-2 border-[#1E3964] rounded-full w-20 h-8">
                 Cancel
               </div>
             </div>

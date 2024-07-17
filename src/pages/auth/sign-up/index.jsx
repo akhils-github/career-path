@@ -9,9 +9,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../../../utils/schema";
 import { REGISTER_USER, basicXFormRequest } from "../../../api";
 import toast from "react-hot-toast";
+import { useUserStore } from "../../../lib/user";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
+  const { setUser } = useUserStore((state) => state);
+
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
   const [experience, setExperience] = useState("");
@@ -44,7 +47,7 @@ export default function SignUp() {
         setLoader(false);
         toast.success("User registered successfully");
         localStorage.setItem("resData", JSON.stringify(res.data));
-
+        setUser(res.data)
         navigate("/profile-create");
       } else {
         setLoader(false);

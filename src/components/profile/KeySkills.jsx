@@ -1,8 +1,10 @@
 import { Pen, X } from "lucide-react";
 import React, { useState } from "react";
 
-export default function KeySkills() {
+export default function KeySkills({profile}) {
   const [isEdit, setIsEdit] = useState(true);
+  const skillsArray = profile?.skills?.split(',');
+console.log(skillsArray)
   return (
     <>
       {isEdit ? (
@@ -14,10 +16,12 @@ export default function KeySkills() {
             <div className="flex flex-col gap-y-2">
               <h3>Key Skills</h3>
               <div className="flex flex-wrap gap-3">
-                <div className="border  rounded-full border-[#275DF5] text-[#275DF5] flex justify-between items-center h-8 w-fit px-3">
-                  <span>Photoshop</span>
+                {skillsArray?.map((item,i)=>(
+                <div key={i} className="border  rounded-full border-[#275DF5] text-[#275DF5] flex justify-between items-center h-8 w-fit px-3">
+                  <span>{item}</span>
                   <X className="size-5 cursor-pointer ml-3" />
                 </div>
+                ))}
               </div>
             </div>
           </div>
