@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 // import Tick from "/images/profile/tick-circle.svg";
 export default function ProfileHeader({ userData }) {
   console.log(userData);
+  {console.log(userData?.profile_photo)}
   return (
     <div className="w-full">
       <div className="-mt-12 overflow-y-min mx-auto rounded ">
@@ -12,7 +13,7 @@ export default function ProfileHeader({ userData }) {
           <div className="-mt-12 relative p-3 bg-white w-40  rounded shadow-md">
             <img
               className=" cursor-pointer w-full h-full object-contain rounded"
-              src="/images/tony.png"
+              src={userData?.profile_photo}
             />
             <label
               htmlFor="upload"

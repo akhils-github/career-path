@@ -60,8 +60,8 @@ export default function ProfileDetail() {
       first_name: data?.firstName,
       last_name: data?.lastName,
       email: email,
-      // role_type: data?.,
-      // status: data?.,
+      role_type: 4,
+      status:1,
       languages: languageIds,
 
       gender: gender,
@@ -83,7 +83,7 @@ export default function ProfileDetail() {
 
     try {
       const res = await newRequest.post(SAVE_MEMBER, formData);
-      if (res.success) {
+      if (res?.data.success) {
         setLoader(false);
         toast.success("Profile Created  sucessfully");
         navigate("/profile");
