@@ -78,7 +78,7 @@ export default function ProfileDetail() {
       visa_status: visaStatus,
       marital_status: maritalStatus,
       driving_license: isLicense,
-      profile_photo: base64Image,
+      profile_photo: imageFile,
     };
 
     try {
