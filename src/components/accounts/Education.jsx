@@ -6,9 +6,14 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { yearsListing } from "../../constants/selectDate";
 
-export default function EducationDetail({ loader }) {
-  const { register, control } = useForm();
-  const [educationStatus, setEducationStatus] = useState("");
+export default function EducationDetail({
+  loader,
+  educationStatus,
+  setEducationStatus,
+  control,
+  register,
+  errors,
+}) {
   // year listing
   let yearList = yearsListing?.map((i) => {
     return { id: i, value: i, label: i };
@@ -67,7 +72,7 @@ export default function EducationDetail({ loader }) {
             Course
           </label>
           <Controller
-            name="state"
+            name="course"
             control={control}
             defaultValue=""
             rules={{ required: true }}
@@ -103,7 +108,7 @@ export default function EducationDetail({ loader }) {
             Specialization
           </label>
           <Controller
-            name="state"
+            name="specialization"
             control={control}
             defaultValue=""
             rules={{ required: true }}
@@ -139,7 +144,7 @@ export default function EducationDetail({ loader }) {
             University / Institute
           </label>
           <Controller
-            name="state"
+            name="university"
             control={control}
             defaultValue=""
             rules={{ required: true }}
@@ -174,7 +179,11 @@ export default function EducationDetail({ loader }) {
           <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
             Institute Location
           </label>
-          <input type="text" className="input-box" />
+          <input
+            type="text"
+            className="input-box"
+            {...register("instituteLocation", { required: true })}
+          />
           {/* {errors.state && (
         <span className="text-xs font-medium text-red-500">
           {errors.state?.message}

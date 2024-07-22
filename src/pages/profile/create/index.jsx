@@ -12,6 +12,8 @@ import { useNavigate } from "react-router";
 export default function ProfileCreate() {
   const [loader, setLoader] = useState(false);
   const [workingStatus, setWorkingStatus] = useState("");
+  const [educationStatus, setEducationStatus] = useState("");
+
   const navigate = useNavigate();
   const { id } = useUserStore((state) => state.user);
   console.log(id);
@@ -57,11 +59,11 @@ export default function ProfileCreate() {
       },
       education: [
         {
-          highest_qualification: "",
-          course: 1,
-          specialization: 1,
-          university: 1,
-          education_location: 1,
+          highest_qualification: educationStatus,
+          course: data?.course,
+          specialization: data?.specialization,
+          university: data?.university,
+          education_location: data?.instituteLocation,
           passing_year: data?.passingYear?.value,
         },
       ],
@@ -96,7 +98,14 @@ export default function ProfileCreate() {
         setWorkingStatus={setWorkingStatus}
         workingStatus={workingStatus}
       />
-      <EducationDetail loader={loader} />
+      <EducationDetail
+        loader={loader}
+        educationStatus={educationStatus}
+        setEducationStatus={setEducationStatus}
+        register={register}
+        control={control}
+        errors={errors}
+      />
     </form>
   );
 }
