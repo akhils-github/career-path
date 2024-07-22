@@ -8,6 +8,7 @@ import { yearsListing } from "../../constants/selectDate";
 
 export default function EducationDetail({ loader }) {
   const { register, control } = useForm();
+  const [educationStatus, setEducationStatus] = useState("");
   // year listing
   let yearList = yearsListing?.map((i) => {
     return { id: i, value: i, label: i };
@@ -20,12 +21,46 @@ export default function EducationDetail({ loader }) {
   return (
     <div className="bg-white px-8 py-6">
       <div className="px-3 pb-6">
-        <h5>Your current or latest Employment Details</h5>
-        <p>
-          Give insights of your professional journey. We will make it more
-          colorful!
+        <h5 className="heading">Education and Cetifications</h5>
+        <p className="text-sm">
+          Give the
+          <span className="font-bold uppercase">Highest education </span> and
+          your Professional Certifications
         </p>
+        <div className="flex gap-4 items-center mt-3">
+          <div
+            onClick={() => setEducationStatus("basic")}
+            className={`rounded-full border cursor-pointer  w-72 h-8 flex items-center justify-center ${
+              educationStatus === "basic" ? "active-option" : "border-[#808080]"
+            }`}
+          >
+            Basic (Bachelors/Diploma/School)
+          </div>
+          <div
+            onClick={() => setEducationStatus("masters")}
+            className={`rounded-full cursor-pointer border w-20 h-8 flex justify-center items-center
+                  ${
+                    educationStatus === "masters"
+                      ? "active-option"
+                      : "border-[#808080]"
+                  }   `}
+          >
+            Masters
+          </div>
+          <div
+            onClick={() => setEducationStatus("doctorate")}
+            className={`rounded-full cursor-pointer border w-28 h-8 flex justify-center items-center
+                  ${
+                    educationStatus === "doctorate"
+                      ? "active-option"
+                      : "border-[#808080]"
+                  }   `}
+          >
+            Doctorate
+          </div>
+        </div>
       </div>
+
       <div className="flex flex-col gap-y-4 max-w-2xl">
         <div className="flex px-3 group flex-col space-y-2">
           <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">

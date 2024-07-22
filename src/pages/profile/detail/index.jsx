@@ -20,8 +20,8 @@ export default function ProfileDetailView() {
     queryKey: ["profileListing"],
     queryFn: () => newRequest.get(GET_PROFILES).then((res) => res.data),
   });
-const {profile } = profileListing ?? {}
-console.log(profile)
+  const { profile } = profileListing ?? {};
+  console.log(profile);
   console.log(profileListing);
   return (
     <div className="flex flex-col gap-4">
