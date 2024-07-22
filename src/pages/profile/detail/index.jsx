@@ -32,7 +32,7 @@ export default function ProfileDetailView() {
           <CVHeadline profile={profile} />
           <KeySkills profile={profile} />
           <Summary userData={profileListing} />
-          <Employment />
+          <Employment details={profile?.employer_details} />
           <ITSkills />
           <EducationDetails />
           <PersonalDetails />
