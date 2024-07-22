@@ -31,7 +31,7 @@ console.log(profile)
         <div className="flex-[0.7] flex flex-col gap-4  ">
           <CVHeadline profile={profile} />
           <KeySkills profile={profile} />
-          <Summary />
+          <Summary userData={profileListing} />
           <Employment />
           <ITSkills />
           <EducationDetails />

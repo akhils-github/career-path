@@ -40,6 +40,7 @@ export const newFormRequest = axios.create({
 // LOGIN USERS
 export const LOGIN = "users/login/";
 export const REGISTER_USER = "users/register/";
+export const FACEBOOK_LOGIN = "users/facebook_login/";
 
 //profile create
 export const INDUSTRIES = "users/industries/";

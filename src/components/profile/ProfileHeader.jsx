@@ -13,7 +13,7 @@ export default function ProfileHeader({ userData }) {
           <div className="-mt-12 relative p-3 bg-white w-40  rounded shadow-md">
             <img
               className=" cursor-pointer w-full h-full object-contain rounded"
-              src={userData?.profile_photo}
+              src={"https://seekats.com/static/"+"demo.png"}
             />
             <label
               htmlFor="upload"

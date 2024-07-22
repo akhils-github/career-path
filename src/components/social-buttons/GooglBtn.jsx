@@ -7,17 +7,21 @@ export default function GooglBtn() {
     alert("login start");
   }, []);
 
-
   return (
     <LoginSocialGoogle
-      client_id={import.meta.env.REACT_APP_GG_APP_ID || ""}
+      // client_id={
+      //   "301975931981-7k9gfrgjvmvslv0rjr5ut4vquiqknbe8.apps.googleusercontent.com"
+      // }
+      client_id="985135946166-v9sume15fv13h8ccouhfnche7gbg0ncr.apps.googleusercontent.com"
       onLoginStart={onLoginStart}
-      redirect_uri={REDIRECT_URI}
-      scope="openid profile email"
-      discoveryDocs="claims_supported"
-      access_type="offline"
-      onResolve={({ provider, data }) => {
-        console.log(provider, data);
+      cookie_policy={"single_host_origin"}
+      // redirect_uri={REDIRECT_URI}
+      // scope="openid profile email"
+      // discoveryDocs="claims_supported"
+      // access_type="offline"
+
+      onResolve={(data) => {
+        console.log( data);
       }}
       onReject={(err) => {
         console.log(err);

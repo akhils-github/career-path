@@ -1,8 +1,10 @@
 import { Pen } from "lucide-react";
 import React, { useState } from "react";
 
-export default function Summary() {
+export default function Summary({userData}) {
+console.log(userData)
   const [isEdit, setIsEdit] = useState(true);
+  // const {employer_country} = userData?.profile?.employer_details
 
   return (
     <div className="px-3 py-6 bg-white mb-4 pb-6 rounded-md">

@@ -2,20 +2,22 @@ import { useCallback } from "react";
 import { LoginSocialLinkedin } from "reactjs-social-login";
 
 export default function LinkedInBtn() {
-  const REDIRECT_URI = "http://localhost:3000/account/login";
+  const REDIRECT_URI = "http://localhost:3000/succes";
   const onLoginStart = useCallback(() => {
     alert("login start");
   }, []);
 
   return (
     <LoginSocialLinkedin
-      client_id={import.meta.env.REACT_APP_LINKEDIN_APP_ID || ""}
-      client_secret={import.meta.env.REACT_APP_LINKEDIN_APP_SECRET || ""}
+      client_id={"869kd8awoot2ow"}
+      client_secret={"Jwk37LMiXENDe4vd"}
+      scope="openid profile w_member_social email"
       redirect_uri={REDIRECT_URI}
       onLoginStart={onLoginStart}
-      onResolve={({ provider, data }) => {
-        setProvider(provider);
-        setProfile(data);
+      onResolve={( data ) => {
+        // setProvider(provider);
+        // setProfile(data);
+        console.log(data)
       }}
       onReject={(err) => {
         console.log(err);
