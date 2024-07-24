@@ -1,10 +1,55 @@
 import { Pen } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { newRequest, PROFILE_UPDATE } from "../../api";
+import toast from "react-hot-toast";
+import { useQueryClient } from "@tanstack/react-query";
 
-export default function CVHeadline({profile}) {
+export default function CVHeadline({ profile }) {
   const [isEdit, setIsEdit] = useState(false);
-  let {profile_heading}   =  profile ?? {}
-  console.log(profile)
+  const [loader, setLoader] = useState(false);
+  const queryClient = useQueryClient();
+  let { profile_heading } = profile ?? {};
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    mode: "onSubmit",
+    // resolver: yupResolver(schema),
+  });
+  useEffect(() => {
+    if (profile_heading) {
+      setValue("headline", profile_heading);
+    }
+  }, [profile_heading]);
+  const onSubmit = (data) => {
+    setLoader(true);
+    handleProfile(data);
+  };
+  const handleProfile = async (data) => {
+    const formData = {
+      profile_heading: data?.headline,
+    };
+    try {
+      const res = await newRequest.put(
+        `${PROFILE_UPDATE}${profile?.id}/`,
+        formData
+      );
+      console.log(res);
+      if (res.status == 200) {
+        queryClient.invalidateQueries(["profileListing"]);
+        setIsEdit(false);
+        setLoader(false);
+        toast.success("Headline sucessfull");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       {!isEdit ? (
@@ -42,17 +87,26 @@ export default function CVHeadline({profile}) {
               </p>
             </div>
           </div>
-          <div className="pl-16 my-3 flex flex-col gap-y-3">
-            <textarea  className="bg-[#E9EFFE] w-full h-20 px-2 py-1.5" />
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="pl-16 my-3 flex flex-col gap-y-3"
+          >
+            <textarea
+              {...register("headline")}
+              className="bg-[#E9EFFE] w-full h-20 px-2 py-1.5"
+            />
             <div className="flex gap-2 items-center">
-              <div className="flex justify-center items-center text-white bg-[#1E3964] rounded-full w-20 h-8">
+              <button className="flex justify-center items-center text-white bg-[#1E3964] rounded-full w-20 h-8">
                 Save
-              </div>
-              <div onClick={()=>setIsEdit(!isEdit)} className="flex justify-center items-center cursor-pointer text-[#1E3964] font-medium border-2 border-[#1E3964] rounded-full w-20 h-8">
+              </button>
+              <div
+                onClick={() => setIsEdit(!isEdit)}
+                className="flex justify-center items-center cursor-pointer text-[#1E3964] font-medium border-2 border-[#1E3964] rounded-full w-20 h-8"
+              >
                 Cancel
               </div>
             </div>
-          </div>
+          </form>
         </div>
       )}
     </>

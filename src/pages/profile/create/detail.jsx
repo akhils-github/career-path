@@ -86,7 +86,7 @@ export default function ProfileDetail() {
       if (res?.data.success) {
         setLoader(false);
         toast.success("Profile Created  sucessfully");
-        navigate("/profile");
+        // navigate("/profile");
         // queryClient.invalidateQueries([""]);
       }
     } catch (error) {

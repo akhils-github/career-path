@@ -3,11 +3,13 @@ import { isFileAllowed } from "../utils/image";
 import toast from "react-hot-toast";
 
 export const useImageUploader = (initialImage = "") => {
+  console.log(initialImage)
   const [image, setImage] = useState(initialImage);
   const [imageFile, setImageFile] = useState("");
   const [base64Image, setBase64Image] = useState("");
 
   const handleImage = (e) => {
+    console.log(e)
     e.preventDefault();
     const selectedFile = e.target.files[0];
 

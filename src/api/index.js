@@ -58,6 +58,7 @@ export const RELIGION = "users/religions/";
 export const SAVE_MEMBER = "users/save_member/";
 
 export const GET_PROFILES = "users/profile/";
+export const PROFILE_UPDATE = "users/profile_update/";
 
 newRequest.interceptors.request.use((config) => {
   const localData = JSON.parse(localStorage.getItem("resData"));

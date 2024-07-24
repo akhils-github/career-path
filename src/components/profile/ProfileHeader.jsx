@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 // import Tick from "/images/profile/tick-circle.svg";
 export default function ProfileHeader({ userData }) {
   console.log(userData);
-  {console.log(userData?.profile_photo)}
+  {
+    console.log(userData?.profile_photo);
+  }
   return (
     <div className="w-full">
       <div className="-mt-12 overflow-y-min mx-auto rounded ">
@@ -13,7 +15,7 @@ export default function ProfileHeader({ userData }) {
           <div className="-mt-12 relative p-3 bg-white w-40  rounded shadow-md">
             <img
               className=" cursor-pointer w-full h-full object-contain rounded"
-              src={"https://seekats.com/static/"+"demo.png"}
+              src={"/images/account/no-profile.jpg"}
             />
             <label
               htmlFor="upload"
@@ -30,15 +32,15 @@ export default function ProfileHeader({ userData }) {
                 {userData?.first_name} {userData?.middle_name}
                 {userData?.last_name}
               </h3>
-              <p>
-                {" "}
-                {userData?.profile?.employer_details?.designation}
-              </p>
+              <p> {userData?.profile?.employer_details?.designation}</p>
             </div>
             <div className="flex  gap-6 items-center mt-6">
               <div className="flex gap-1 items-center">
                 <div className="size-8 rounded-full bg-[#FF572266]"></div>
-                <p>{userData?.profile?.employer_details?.employer_country?.name} , {userData?.profile?.employer_details?.employer_state?.name}</p>
+                <p>
+                  {userData?.profile?.employer_details?.employer_country?.name}{" "}
+                  , {userData?.profile?.employer_details?.employer_state?.name}
+                </p>
               </div>
               <div className="flex gap-1 items-center">
                 <div className="size-8 rounded-full bg-[#1F69FF66]"></div>
