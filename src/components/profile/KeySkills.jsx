@@ -1,13 +1,59 @@
 import { Pen, X } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { newRequest, PROFILE_UPDATE } from "../../api";
+import { useQueryClient } from "@tanstack/react-query";
 
-export default function KeySkills({profile}) {
-  const [isEdit, setIsEdit] = useState(true);
-  const skillsArray = profile?.skills?.split(',');
-console.log(skillsArray)
+export default function KeySkills({ profile }) {
+  const [isEdit, setIsEdit] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const queryClient = useQueryClient();
+
+  const skillsArray = profile?.skills?.split(",");
+  console.log(skillsArray);
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    mode: "onSubmit",
+    // resolver: yupResolver(schema),
+  });
+  useEffect(() => {
+    if (profile?.skills) {
+      setValue("skills", profile?.skills);
+    }
+  }, [skillsArray]);
+
+  const onSubmit = (data) => {
+    setLoader(true);
+    handleProfile(data);
+  };
+  const handleProfile = async (data) => {
+    const formData = {
+      skills: data?.skills,
+    };
+    try {
+      const res = await newRequest.put(
+        `${PROFILE_UPDATE}${profile?.id}/`,
+        formData
+      );
+      console.log(res);
+      if (res.status == 200) {
+        queryClient.invalidateQueries(["profileListing"]);
+        setIsEdit(false);
+        setLoader(false);
+        toast.success("Headline sucessfull");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
-      {isEdit ? (
+      {!isEdit ? (
         <div className="bg-white rounded px-4 h-24 flex justify-between py-2.5">
           <div className="flex gap-4 py-2">
             <div className="bg-[#1F69FF66] rounded-full size-12 flex items-center justify-center">
@@ -16,11 +62,14 @@ console.log(skillsArray)
             <div className="flex flex-col gap-y-2">
               <h3>Key Skills</h3>
               <div className="flex flex-wrap gap-3">
-                {skillsArray?.map((item,i)=>(
-                <div key={i} className="border  rounded-full border-[#275DF5] text-[#275DF5] flex justify-between items-center h-8 w-fit px-3">
-                  <span>{item}</span>
-                  <X className="size-5 cursor-pointer ml-3" />
-                </div>
+                {skillsArray?.map((item, i) => (
+                  <div
+                    key={i}
+                    className="border  rounded-full border-[#275DF5] text-[#275DF5] flex justify-between items-center h-8 w-fit px-3"
+                  >
+                    <span>{item}</span>
+                    <X className="size-5 cursor-pointer ml-3" />
+                  </div>
                 ))}
               </div>
             </div>
@@ -40,23 +89,32 @@ console.log(skillsArray)
               note
             </div>
             <div>
-              <h3>CV Headline</h3>
+              <h3>Key Skills</h3>
               <p>
-                Graphic Designer in Construction / Civil Engineering in Sadasd
+                Mention your Professional Skills which help you to offer best
+                performance.
               </p>
             </div>
           </div>
-          <div className="pl-16 my-3 flex flex-col gap-y-3">
-            <textarea className="bg-[#E9EFFE] w-full h-20 px-2 py-1.5" />
+
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="pl-16 my-3 flex flex-col gap-y-3 max-w-3xl"
+          >
+            <input
+              {...register("skills")}
+              className="bg-[#E9EFFE] w-full h-10 border-2 rounded border-[#407FFF] px-2 py-1.5"
+              placeholder="Enter your Professional skills like Business Management, Communication, Negotiation etc."
+            />
             <div className="flex gap-2 items-center">
-              <div className="flex justify-center items-center text-white bg-[#1E3964] rounded-full w-20 h-8">
+              <button className="flex justify-center items-center text-white bg-[#1E3964] rounded-full w-20 h-8">
                 Save
-              </div>
+              </button>
               <div className="flex justify-center items-center text-[#1E3964] font-medium border-2 border-[#1E3964] rounded-full w-20 h-8">
                 Cancel
               </div>
             </div>
-          </div>
+          </form>
         </div>
       )}
     </>
