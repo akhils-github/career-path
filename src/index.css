@@ -50,6 +50,9 @@ body::-webkit-scrollbar-thumb {
   border-radius: 100px;
 }
 
+textarea:focus {
+  outline: none;
+}
 .overflow-y-min::-webkit-scrollbar {
   width: 2px;
 }

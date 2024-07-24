@@ -24,6 +24,8 @@
     "react-router-dom": "^6.23.1",
     "react-select": "^5.8.0",
     "reactjs-social-login": "^2.6.3",
+    "slate": "^0.103.0",
+    "slate-react": "^0.107.1",
     "yup": "^1.4.0",
     "zustand": "^4.5.4"
   },
