@@ -47,9 +47,9 @@ export default function Summary({ userData }) {
     <div className="px-3 py-6 bg-white mb-4 pb-6 rounded-md">
       <div className="flex justify-between">
         <div className="flex gap-6 w-full">
-          <div className="bg-[#1F69FF66] rounded-full size-12 flex items-center justify-center">
-            Icon
-          </div>
+        <div className="bg-[#1F69FF66] rounded-full size-10 flex items-center justify-center">
+              <img src="/icons/building.svg" alt="" className="size-5" />
+            </div>
           <div className="w-full ">
             <div className="mb-5">
               <h3 className="font-bold ">Professional Summary</h3>

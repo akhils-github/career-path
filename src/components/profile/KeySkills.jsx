@@ -56,8 +56,8 @@ export default function KeySkills({ profile }) {
       {!isEdit ? (
         <div className="bg-white rounded px-4 h-24 flex justify-between py-2.5">
           <div className="flex gap-4 py-2">
-            <div className="bg-[#1F69FF66] rounded-full size-12 flex items-center justify-center">
-              Icon
+          <div className="bg-[#1F69FF66] rounded-full size-10 flex items-center justify-center">
+              <img src="/icons/bulb_on.svg" alt="" className="size-5" />
             </div>
             <div className="flex flex-col gap-y-2">
               <h3>Key Skills</h3>

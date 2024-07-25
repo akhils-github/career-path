@@ -1,5 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { Pen } from "lucide-react";
+import { MapPin, Pen } from "lucide-react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -46,8 +46,8 @@ export default function EducationDetails() {
       <div>
         <div className="flex justify-between">
           <div className="flex gap-6">
-            <div className="bg-[#1F69FF66] rounded-full size-12 flex items-center justify-center">
-              Icon
+            <div className="bg-[#1F69FF66] rounded-full size-10 flex items-center justify-center">
+              <img src="/icons/education.svg" alt="" className="size-5" />
             </div>
             <div>
               <h3 className="font-bold">Education Details</h3>
@@ -63,8 +63,8 @@ export default function EducationDetails() {
           {isEdit ? (
             <div className="flex justify-between">
               <div className="flex gap-6">
-                <div className="bg-[#1F69FF66] rounded-full size-12 flex items-center justify-center">
-                  Icon
+                <div className="bg-[#FF5722]/40 rounded-full size-8 flex items-center justify-center">
+                  <MapPin  className="text-[#FF5722] size-5"/>
                 </div>
                 <div>
                   <h3 className=" font-medium">

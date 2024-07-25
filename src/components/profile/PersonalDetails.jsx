@@ -1,4 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
+import { Pen } from "lucide-react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -45,26 +46,20 @@ export default function PersonalDetails() {
       <div>
         <div className="flex justify-between">
           <div className="flex gap-4">
-            <div className="bg-[#1F69FF66] rounded-full size-12 flex items-center justify-center">
-              Icon
+            <div className="bg-[#1F69FF66] rounded-full size-10 flex items-center justify-center">
+              <img src="/icons/person.svg" alt="" className="size-5" />
             </div>
             <div>
               <h3 className="font-bold pb-4">Personal Details</h3>
             </div>
           </div>
           {!isEdit && (
-            <div className=" text-blue-600 pr-5">
-              <div
-                onClick={() => setIsEdit(true)}
-                className="flex gap-1 border border-blue-600 rounded-full px-2"
-              >
-                Edit
-                <span>
-                  <div className="w-3 pt-2">
-                    <img src="/images/edit.png" alt="" />
-                  </div>
-                </span>
-              </div>
+            <div
+              onClick={() => setIsEdit(!isEdit)}
+              className="border-2 cursor-pointer rounded-full w-fit px-2.5  h-8 flex gap-2 justify-center items-center border-[#275DF5] text-[#275DF5] bg-[#E9EFFE]"
+            >
+              <span>Edit</span>
+              <Pen className="size-4 fill-[#275DF5]" />
             </div>
           )}
         </div>
@@ -334,7 +329,7 @@ export default function PersonalDetails() {
               <button className="h-10 w-24  bg-[#1E3964] rounded-full text-white flex items-center justify-center">
                 Save
               </button>
-       
+
               <div
                 onClick={() => setIsEdit(false)}
                 className="h-10 w-24 border cursor-pointer border-[#1E3964] rounded-full text-[#1E3964] flex items-center justify-center"

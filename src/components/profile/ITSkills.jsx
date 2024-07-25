@@ -45,9 +45,9 @@ export default function ITSkills() {
     <div className=" bg-white px-4 py-4 rounded-md">
       <div className="flex justify-between  w-full">
         <div className="flex gap-4 w-full ">
-          <div className="bg-[#1F69FF66] rounded-full size-12 flex items-center justify-center">
-            Icon
-          </div>
+        <div className="bg-[#1F69FF66] rounded-full size-10 flex items-center justify-center">
+              <img src="/icons/brain.svg" alt="" className="size-5" />
+            </div>
           <div className=" w-full">
             <h3 className="font-bold w-full col-span-3">
               IT Skills / Certifications

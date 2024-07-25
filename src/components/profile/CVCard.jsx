@@ -1,4 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
+import { Pen } from "lucide-react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -51,15 +52,12 @@ export default function CVCard() {
               <h3 className="font-bold pb-4">Original CV</h3>
             </div>
           </div>
-          <div className=" text-blue-600 pr-5">
-            <button className="flex gap-1 border border-blue-600 rounded-full px-2">
-              Edit
-              <span>
-                <div className="w-3 pt-2">
-                  <img src="/images/edit.png" alt="" />
-                </div>
-              </span>
-            </button>
+          <div
+            onClick={() => setIsEdit(!isEdit)}
+            className="border-2 cursor-pointer rounded-full w-fit px-2.5  h-8 flex gap-2 justify-center items-center border-[#275DF5] text-[#275DF5] bg-[#E9EFFE]"
+          >
+            <span>Edit</span>
+            <Pen className="size-4 fill-[#275DF5]" />
           </div>
         </div>
         <div className="mt-4 mr-8 ml-16 pt-4 bg-[#E9EFFE] mb-4 pb-6 rounded-md">
