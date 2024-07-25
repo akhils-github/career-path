@@ -1,11 +1,48 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { Pen } from "lucide-react";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function Summary({ userData }) {
   console.log(userData);
   const [isEdit, setIsEdit] = useState(false);
   // const {employer_country} = userData?.profile?.employer_details
-
+  const [loader, setLoader] = useState(false);
+  const queryClient = useQueryClient();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    mode: "onSubmit",
+    // resolver: yupResolver(schema),
+  });
+  const onSubmit = (data) => {
+    setLoader(true);
+    handleProfile(data);
+  };
+  const handleProfile = async (data) => {
+    const formData = {
+      skills: data?.skills,
+    };
+    try {
+      const res =
+        //  await newRequest.put(
+        //   `${PROFILE_UPDATE}${profile?.id}/`,
+        //   formData
+        // );
+        console.log(res);
+      if (res.status == 200) {
+        queryClient.invalidateQueries(["profileListing"]);
+        setIsEdit(false);
+        setLoader(false);
+        toast.success("Headline sucessfull");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="px-3 py-6 bg-white mb-4 pb-6 rounded-md">
       <div className="flex justify-between">

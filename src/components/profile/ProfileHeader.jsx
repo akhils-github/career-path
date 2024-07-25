@@ -3,10 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 // import Tick from "/images/profile/tick-circle.svg";
 export default function ProfileHeader({ userData }) {
-  console.log(userData);
-  {
-    console.log(userData?.profile_photo);
-  }
+
   return (
     <div className="w-full">
       <div className="-mt-12 overflow-y-min mx-auto rounded ">

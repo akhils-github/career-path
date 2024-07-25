@@ -1,6 +1,44 @@
-import React from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function CVCard() {
+  const [loader, setLoader] = useState(false);
+  const queryClient = useQueryClient();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    mode: "onSubmit",
+    // resolver: yupResolver(schema),
+  });
+  const onSubmit = (data) => {
+    setLoader(true);
+    handleProfile(data);
+  };
+  const handleProfile = async (data) => {
+    const formData = {
+      skills: data?.skills,
+    };
+    try {
+      const res =
+        //  await newRequest.put(
+        //   `${PROFILE_UPDATE}${profile?.id}/`,
+        //   formData
+        // );
+        console.log(res);
+      if (res.status == 200) {
+        queryClient.invalidateQueries(["profileListing"]);
+        setIsEdit(false);
+        setLoader(false);
+        toast.success("Headline sucessfull");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="mt-4 pt-4 bg-white mb-4 pb-6 rounded-md">
       <div>
