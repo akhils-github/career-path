@@ -122,6 +122,36 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 }
 
+@-webkit-keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(-20rem * 7));
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(-20rem * 7));
+  }
+}
+
+@keyframes scroll {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: -100%;
+  }
+}
+
 button:focus {
   outline: none;
 }

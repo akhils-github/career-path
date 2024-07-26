@@ -29,7 +29,7 @@ console.log(isAccess)
         <AccountSideBar />
       </div>
 
-      <div className="flex-1 lg:flex-[0.7]  w-full h-full  overflow-y-auto overflow-y-min">
+      <div className="flex-1 lg:flex-[0.7]  w-full h-full">
         <Outlet />
       </div>
     </div>
