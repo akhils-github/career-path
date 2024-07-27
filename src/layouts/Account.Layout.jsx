@@ -23,13 +23,13 @@ console.log(isAccess)
 
 
   console.log(isAccess);
-  return isAccess ? (
-    <div className="h-screen w-screen bg-[#F8F9FA] flex">
+  return !isAccess ? (
+    <div className="h-screen w-screen bg-[#F8F9FA] flex overflow-hidden">
       <div className="hidden bg-[#1E3964] flex-[0.3] h-full  relative lg:flex items-center justify-center">
         <AccountSideBar />
       </div>
 
-      <div className="flex-1 lg:flex-[0.7]  w-full h-full">
+      <div className="flex-1 lg:flex-[0.7]  w-full">
         <Outlet />
       </div>
     </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ProfileProgress({ status }) {
   return (
-    <div className="bg-white rounded h-24 flex flex-col gap-2 justify-center px-10">
+    <div className="bg-white py-6 rounded h-24 flex flex-col gap-2 justify-center px-10">
       <p className="text-sm font-semibold">{status}% Profile Completed</p>
       {/* <progress
         className="progress progress-error bg-[#D9D9D991] w-full h-4"

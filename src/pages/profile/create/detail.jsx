@@ -101,7 +101,7 @@ export default function ProfileDetail() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="px-10 py-8 max-w-5xl mx-auto flex flex-col gap-y-4"
+      className="px-10 py-8 max-w-5xl mx-auto flex flex-col gap-y-4 h-full overflow-y-auto overflow-y-min"
     >
       <ProfileProgress status={50} />
       <UploadImage

@@ -88,7 +88,7 @@ export default function ProfileCreate() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="px-16 py-8 mx-auto flex flex-col gap-y-6"
+      className="px-16 py-8 mx-auto flex flex-col gap-y-6 overflow-y-auto overflow-y-min h-full"
     >
       <ProfileProgress status={10} />
       <EmploymentDetail

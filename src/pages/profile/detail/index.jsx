@@ -24,7 +24,7 @@ export default function ProfileDetailView() {
   console.log(profile);
   console.log(profileListing);
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 overflow-y-min">
       <ProfileHeader userData={profileListing} />
       <NavItems />
       <div className="flex gap-x-5">
