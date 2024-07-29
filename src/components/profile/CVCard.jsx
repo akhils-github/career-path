@@ -41,7 +41,7 @@ export default function CVCard() {
     }
   };
   return (
-    <div className="mt-4 pt-4 bg-white mb-4 pb-6 rounded-md">
+    <div id="9" className="mt-4 pt-4 bg-white mb-4 pb-6 rounded-md">
       <div>
         <div className="flex justify-between">
           <div className="flex gap-6">

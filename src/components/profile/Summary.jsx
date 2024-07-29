@@ -44,7 +44,7 @@ export default function Summary({ userData }) {
     }
   };
   return (
-    <div className="px-3 py-6 bg-white mb-4 pb-6 rounded-md">
+    <div id="3" className="px-3 py-6 bg-white mb-4 pb-6 rounded-md">
       <div className="flex justify-between">
         <div className="flex gap-6 w-full">
         <div className="bg-[#1F69FF66] rounded-full size-10 flex items-center justify-center">

@@ -18,9 +18,9 @@ export default function NavItems() {
     // resolver: yupResolver(schema),
   });
   return (
-    <div className="bg-white shadow-md w-full py-2 h-16 items-center rounded grid grid-cols-6 md:grid-cols-10 justify-items-center px-3 ">
+    <div className="bg-white shadow-md w-full py-2 h-16 items-center rounded grid grid-cols-6 md:grid-cols-9 justify-items-center px-3 ">
       {profileNav?.map((item) => (
-        <a 
+        <a
           href={"#" + item?.id}
           onClick={() => setActiveItem(item?.id)}
           key={item?.id}

@@ -42,7 +42,7 @@ export default function PersonalDetails() {
     }
   };
   return (
-    <div className=" bg-white  rounded-md px-4 py-3">
+    <div id="7" className=" bg-white  rounded-md px-4 py-3">
       <div>
         <div className="flex justify-between">
           <div className="flex gap-4">

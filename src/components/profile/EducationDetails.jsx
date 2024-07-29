@@ -42,7 +42,7 @@ export default function EducationDetails() {
     }
   };
   return (
-    <div className=" py-4 px-4 bg-white  rounded-md">
+    <div id="6" className=" py-4 px-4 bg-white  rounded-md">
       <div>
         <div className="flex justify-between">
           <div className="flex gap-6">

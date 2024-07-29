@@ -42,7 +42,7 @@ export default function ITSkills() {
     }
   };
   return (
-    <div className=" bg-white px-4 py-4 rounded-md">
+    <div id="5" className=" bg-white px-4 py-4 rounded-md">
       <div className="flex justify-between  w-full">
         <div className="flex gap-4 w-full ">
         <div className="bg-[#1F69FF66] rounded-full size-10 flex items-center justify-center">

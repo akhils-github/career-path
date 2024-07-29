@@ -42,7 +42,7 @@ export default function DesiredJob() {
     }
   };
   return (
-    <div className=" bg-white  rounded-md px-4 py-5">
+    <div id="8" className=" bg-white  rounded-md px-4 py-5">
       <div className="flex items-center justify-between">
         <div className="flex gap-4 items-center">
           <div className="bg-[#1F69FF66] rounded-full size-10 flex items-center justify-center">

@@ -17,26 +17,22 @@ export const profileNav = [
     },
     {
       id: 5,
-      name: "Headline"
-    },
-    {
-      id: 6,
       name: "IT Skills"
     },
     {
-      id: 7,
+      id: 6,
       name: "Education"
     },
     {
-      id: 8,
+      id: 7,
       name: "Personal"
     },
     {
-      id: 9,
+      id: 8,
       name: "Desired Job"
     },
     {
-      id: 10,
+      id: 9,
       name: "CV"
     }
   ];
