@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { profileNav } from "../../constants/NavData";
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 export default function NavItems() {
   const [activeItem, setActiveItem] = useState(1);
@@ -19,7 +20,8 @@ export default function NavItems() {
   return (
     <div className="bg-white shadow-md w-full py-2 h-16 items-center rounded grid grid-cols-6 md:grid-cols-10 justify-items-center px-3 ">
       {profileNav?.map((item) => (
-        <div
+        <a 
+          href={"#" + item?.id}
           onClick={() => setActiveItem(item?.id)}
           key={item?.id}
           className={`${
@@ -29,7 +31,7 @@ export default function NavItems() {
           } flex items-center justify-center w-fit px-4 h-10 font-bold rounded whitespace-nowrap`}
         >
           {item?.name}
-        </div>
+        </a>
       ))}
     </div>
   );
