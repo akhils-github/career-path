@@ -31,6 +31,7 @@ export default function ProfileCreate() {
     setLoader(true);
     handleProfileCreate(data);
   };
+  console.log(errors);
 
   const handleProfileCreate = async (data) => {
     console.log(data);
