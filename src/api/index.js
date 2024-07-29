@@ -51,6 +51,9 @@ export const CITIES = "users/cities/";
 export const FUNCTIONAL_AREAS = "users/function-areas/";
 export const CURRENCIES = "users/currencies/";
 export const PROFILE_CREATE = "users/save/";
+export const COURSES_LIST = "users/courses_list/";
+export const SPECIALIZATION = "users/specializations_list/";
+export const LOCATIONS_LIST = "users/locations_list/";
 
 //profile Details
 export const LANGUAGES = "users/languages/";
