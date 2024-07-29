@@ -12,18 +12,17 @@ export default function AccountLayout() {
   const pathWithoutLayout = pathName?.pathname.includes("sign-up");
   const isAccess = decodeToken(user?.access_token) || pathWithoutLayout;
 
-  console.log(user)
+  console.log(user);
 
-console.log(isAccess)
+  console.log(isAccess);
   useEffect(() => {
     if (isAccess) {
       setUser(user);
     }
   }, [isAccess]);
 
-
   console.log(isAccess);
-  return !isAccess ? (
+  return isAccess ? (
     <div className="h-screen w-screen bg-[#F8F9FA] flex overflow-hidden">
       <div className="hidden bg-[#1E3964] flex-[0.3] h-full  relative lg:flex items-center justify-center">
         <AccountSideBar />
