@@ -316,7 +316,7 @@ export default function Employment({ details }) {
           </div>
         </div>
         {!isEdit && (
-          <div className=" text-blue-600 w-20">
+          <div className=" text-blue-600 w-24">
             <button className="flex gap-1 border border-blue-600 rounded-full px-2">
               Add +
             </button>
