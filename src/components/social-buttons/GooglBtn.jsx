@@ -1,30 +1,48 @@
 import { useCallback } from "react";
 import { LoginSocialGoogle } from "reactjs-social-login";
+import { GOOGLE_LOGIN, newRequest } from "../../api";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 export default function GooglBtn() {
   const REDIRECT_URI = "http://localhost:3000/account/login";
-  const onLoginStart = useCallback(() => {
-    alert("login start");
-  }, []);
+  const navigate = useNavigate();
 
+  const handleGoogle = async (response) => {
+    console.log("res", response);
+    const formData = {
+      access_token: response?.data?.access_token,
+    };
+    try {
+      const res = await newRequest.post(GOOGLE_LOGIN, formData);
+      console.log(res);
+
+      if (res.status == 200) {
+        toast.success("sucessfully");
+        navigate("/profile-create");
+        localStorage.setItem("resData", JSON.stringify(res.data));
+      }
+    } catch (error) {
+      if (error.response) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error( error.message);
+      }
+    }
+  };
   return (
     <LoginSocialGoogle
-      // client_id={
-      //   "301975931981-7k9gfrgjvmvslv0rjr5ut4vquiqknbe8.apps.googleusercontent.com"
-      // }
       client_id="985135946166-v9sume15fv13h8ccouhfnche7gbg0ncr.apps.googleusercontent.com"
-      onLoginStart={onLoginStart}
       cookie_policy={"single_host_origin"}
       // redirect_uri={REDIRECT_URI}
-      // scope="openid profile email"
+      scope="openid profile email"
       // discoveryDocs="claims_supported"
-      // access_type="offline"
 
       onResolve={(data) => {
-        console.log( data);
+        handleGoogle(data);
       }}
       onReject={(err) => {
-        console.log(err);
+        toast.error(err);
       }}
     >
       <div className="flex cursor-pointer gap-1.5 items-center px-3 border rounded-full w-fit h-10">
