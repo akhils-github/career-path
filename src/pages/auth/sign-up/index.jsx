@@ -10,6 +10,7 @@ import { signUpSchema } from "../../../utils/schema";
 import { REGISTER_USER, basicXFormRequest } from "../../../api";
 import toast from "react-hot-toast";
 import { useUserStore } from "../../../lib/user";
+import GoogleLoginPage from "../../../components/social-buttons/GoogleAuth";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -80,7 +81,9 @@ export default function SignUp() {
           Create account faster using
         </h3>
         <div className="flex gap-2 py-2.5 px-3 items-center">
-          <GooglBtn /> <FacebookBtn /> <LinkedInBtn />
+         <GoogleLoginPage/> 
+         {/* <GooglBtn />  */}
+         <FacebookBtn /> <LinkedInBtn />
         </div>
         <div className="h-4  border-b relative border-[#0000004D] text-[#0000004D] text-xl mx-3 ">
           <span className="bg-white absolute left-44 px-3">Or</span>
