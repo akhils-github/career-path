@@ -131,7 +131,7 @@ export default function VisaStatus(props) {
           <input
             type="date"
             className="input-box !w-44"
-            {...register("dateOfBirth", { required: true })}
+            {...register("date_of_birth", { required: true })}
           />
           {/* {errors.state && (
     <span className="text-xs font-medium text-red-500">
@@ -298,7 +298,7 @@ export default function VisaStatus(props) {
               Driving License issued from
             </label>
             <Controller
-              name="licenseIssued"
+              name="license_issued_from"
               control={control}
               defaultValue=""
               rules={{ required: false }}

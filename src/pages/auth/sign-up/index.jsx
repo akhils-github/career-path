@@ -7,10 +7,11 @@ import LinkedInBtn from "../../../components/social-buttons/LinkedInBtn";
 import { ArrowRight, MoveRight } from "lucide-react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../../../utils/schema";
-import { REGISTER_USER, basicXFormRequest } from "../../../api";
+import { REGISTER_USER, basicXFormRequest, newFormRequest } from "../../../api";
 import toast from "react-hot-toast";
 import { useUserStore } from "../../../lib/user";
 import GoogleLoginPage from "../../../components/social-buttons/GoogleAuth";
+import { useImageUploader } from "../../../hooks";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,6 +21,15 @@ export default function SignUp() {
   const [loader, setLoader] = useState(false);
   const [experience, setExperience] = useState("");
 
+  const {
+    image ,
+    imageFile,
+    handleImage,
+    removeImage,
+  } = useImageUploader();
+
+  console.log(imageFile)
+console.log(experience)
   const {
     register,
     handleSubmit,
@@ -35,13 +45,25 @@ export default function SignUp() {
   };
 
   const registerUser = async (data) => {
+    console.log(data)
+    if(!data.terms){
+      toast.error("You must agree to the Terms and Conditions & Privacy Policy");
+      setLoader(false);
+      return
+
+    }
     const formData = new FormData();
     formData.append("email", data.email);
     formData.append("password", data.password);
     formData.append("confirm_password", data.confirmPassword);
+    formData.append("experience_level", experience);
+    formData.append("agreed_to_terms", data.terms);
+    imageFile && formData.append("cv_file", imageFile);
+
+
 
     try {
-      const res = await basicXFormRequest.post(REGISTER_USER, formData);
+      const res = await newFormRequest.post(REGISTER_USER, formData);
       console.log(res.data);
 
       if (res.data.status === 1) {
@@ -68,7 +90,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className="w-full  px-20 overflow-y-auto overflow-y-min">
+    <div className="w-full  h-full  px-20 overflow-y-auto overflow-y-min">
       <Link
         to="/sign-in"
         className="flex justify-end w-full gap-1.5 text-sm py-2"
@@ -76,11 +98,11 @@ export default function SignUp() {
         Already Registered?
         <span className="text-[#275DF5] cursor-pointer">Login</span> here
       </Link>
-      <div className="bg-[#FFFFFF] rounded lg:px-24 md:px-6 py-3 shadow-md max-w-4xl">
+      <div className="bg-[#FFFFFF] lg:my-2 rounded lg:px-24 md:px-6 lg:py-6  py-3 shadow-md max-w-4xl">
         <h3 className="font-bold text-base px-3">
           Create account faster using
         </h3>
-        <div className="flex gap-2 py-2.5 px-3 items-center">
+        <div className="flex flex-wrap lg:justify-start justify-center gap-2 py-2.5 px-3 items-center">
          <GoogleLoginPage/> 
          {/* <GooglBtn />  */}
          <FacebookBtn /> <LinkedInBtn />
@@ -90,10 +112,10 @@ export default function SignUp() {
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="grid grid-cols-1 gap-y-3 mt-2.5"
+          className="grid grid-cols-1 lg:gap-y-4 gap-y-3 mt-2.5"
         >
           <div className="flex px-3 group flex-col space-y-2">
-            <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
+            <label className="text-[#3A3A3A] lg:text-[0.9rem] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
               Email ID <span className="text-red-500">*</span>
             </label>
             <input
@@ -110,7 +132,7 @@ export default function SignUp() {
             )}
           </div>
           <div className="flex px-3 group flex-col space-y-2">
-            <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
+            <label className="text-[#3A3A3A] lg:text-[0.9rem] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
               Create Password <span className="text-red-500">*</span>
             </label>
             <input
@@ -127,7 +149,7 @@ export default function SignUp() {
             )}
           </div>
           <div className="flex px-3 group flex-col space-y-2">
-            <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
+            <label className="text-[#3A3A3A] lg:text-[0.9rem] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
               Confirm Password <span className="text-red-500">*</span>
             </label>
             <input
@@ -144,7 +166,7 @@ export default function SignUp() {
             )}
           </div>
           <div className="flex px-3 group flex-col space-y-2 ">
-            <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
+            <label className="text-[#3A3A3A] lg:text-[0.9rem] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
               What is your experience level?
             </label>
             <div className="flex gap-3 text-sm font-medium">
@@ -152,7 +174,7 @@ export default function SignUp() {
                 onClick={() => setExperience("experience")}
                 className={`${
                   experience === "experience" && "active-option "
-                } px-3 border rounded-full py-0.5 cursor-pointer`}
+                } px-3 border rounded-full lg:py-1 py-0.5 cursor-pointer`}
               >
                 I have work experience
               </span>
@@ -160,7 +182,7 @@ export default function SignUp() {
                 onClick={() => setExperience("fresher")}
                 className={`${
                   experience === "fresher" && "active-option"
-                } px-3 border rounded-full py-0.5 cursor-pointer`}
+                } px-3 border rounded-full g:py-1 py-0.5 cursor-pointer`}
               >
                 I am a fresher
               </span>
@@ -169,15 +191,14 @@ export default function SignUp() {
 
           <div className="flex px-3 group flex-col space-y-2 ">
             <label
-              htmlFor="file"
-              className="rounded border cursor-pointer border-dashed flex gap-2 justify-center items-center h-14 bg-[#4F7BF71A] border-[#275DF5]"
+              htmlFor="cv"
+              className="rounded border cursor-pointer border-dashed flex gap-2 justify-center items-center lg:h-16 h-14 bg-[#4F7BF71A] border-[#275DF5]"
             >
               <input
-                id="file"
-                autoComplete="off"
-                type="file"
-                {...register("file")}
-                className="hidden w-full"
+                id="cv"
+                onChange={handleImage}
+              type="file"
+                className="hidden"
               />
               <img src="/icons/upload.svg" alt="" className="w-8" />
               <span className="text-[#275DF5] font-semibold">Browse</span>
@@ -193,15 +214,15 @@ export default function SignUp() {
             )}
           </div>
 
-          <div className="flex gap-2 px-3">
+          <div className="flex  lg:my-4 gap-2 px-3">
             <input type="checkbox" {...register("terms")} />
-            <span className="text-xs font-medium text-[#00000080]">
+            <span className="text-xs lg:text-sm font-medium text-[#00000080]">
               I agree to Terms and Conditions & Privacy Policy governing the use
               of accountz.com
             </span>
           </div>
 
-          <button  className="bg-[#1E3964] m h-8 w-48 rounded-full text-sm  flex  justify-center items-center text-white gap-2 ">
+          <button  className="bg-[#1E3964] lg:my-5 h-8 w-48 rounded-full text-sm  flex  justify-center items-center text-white gap-2 ">
             {loader ? (
               <div className="flex items-center gap-3">
                 <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>

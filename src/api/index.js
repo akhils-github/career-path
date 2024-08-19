@@ -35,6 +35,34 @@ export const newFormRequest = axios.create({
   },
 });
 
+
+newRequest.interceptors.request.use((config) => {
+  const localData = JSON.parse(localStorage.getItem("resData"));
+  const token = localData?.access_token;
+  console.log(token);
+  if (token) {
+    config.headers["Authorization"] = token;
+  }
+  return config;
+});
+newFormRequest.interceptors.request.use((config) => {
+  const localData = JSON.parse(localStorage.getItem("resData"));
+  const token = localData?.access_token;
+  if (token) {
+    config.headers["Authorization"] = token;
+  }
+  return config;
+});
+
+XFormRequest.interceptors.request.use((config) => {
+  const localData = JSON.parse(localStorage.getItem("resData"));
+  const token = localData?.access_token;
+  if (token) {
+    config.headers["Authorization"] = token;
+  }
+  return config;
+});
+
 // ALL THE API CALLS
 
 // LOGIN USERS
@@ -65,29 +93,3 @@ export const SAVE_MEMBER = "users/save_member/";
 export const GET_PROFILES = "users/profile/";
 export const PROFILE_UPDATE = "users/profile_update/";
 
-newRequest.interceptors.request.use((config) => {
-  const localData = JSON.parse(localStorage.getItem("resData"));
-  const token = localData?.access_token;
-  console.log(token);
-  if (token) {
-    config.headers["Authorization"] = token;
-  }
-  return config;
-});
-newFormRequest.interceptors.request.use((config) => {
-  const localData = JSON.parse(localStorage.getItem("resData"));
-  const token = localData?.access_token;
-  if (token) {
-    config.headers["Authorization"] = token;
-  }
-  return config;
-});
-
-XFormRequest.interceptors.request.use((config) => {
-  const localData = JSON.parse(localStorage.getItem("resData"));
-  const token = localData?.access_token;
-  if (token) {
-    config.headers["Authorization"] = token;
-  }
-  return config;
-});

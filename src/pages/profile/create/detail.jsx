@@ -10,7 +10,7 @@ import PersonalDetail from "../../../components/accounts/PersonalDetail";
 import UploadImage from "../../../components/accounts/UploadImage";
 import VisaStatus from "../../../components/accounts/VisaStatus";
 import { useImageUploader } from "../../../hooks";
-import { COUNTRIES, newRequest, SAVE_MEMBER } from "../../../api";
+import { COUNTRIES, newFormRequest, newRequest, SAVE_MEMBER } from "../../../api";
 import { useUserStore } from "../../../lib/user";
 import { useNavigate } from "react-router";
 
@@ -54,35 +54,36 @@ export default function ProfileDetail() {
 
   console.log(errors);
   const handleProfileCreate = async (data) => {
+    const formData = new FormData();
+
+    Object.keys(data).forEach((key) => {
+      formData.append(key, data[key]);
+    });
+    formData.append("email", email);
+    formData.append("role_type", 1);
+    formData.append("status", 1);
+    formData.append("profile_photo", 1);
+    formData.append("marital_status", maritalStatus);
+    formData.append("visa_status", visaStatus);
+    formData.append("driving_license", isLicense);
+    
+
+
+
+
+
+
+
     const languageIds = data?.languages?.map((item) => item.id);
     console.log(data);
-    const formData = {
-      first_name: data?.firstName,
-      last_name: data?.lastName,
-      email: email,
-      role_type: 4,
-      status:1,
-      languages: languageIds,
-
-      gender: gender,
-      country: data?.country?.value,
-      state: data?.state?.value,
-      city: data?.city?.value,
-      nationality: data?.nationality?.value,
-      mobile_number: data?.mobileNumber,
-      date_of_birth: data?.dateOfBirth,
-      religion: data?.religion?.value,
-      license_issued_from: data?.licenseIssued?.value,
-      linkedin_url: data?.linkedin_url,
-
-      visa_status: visaStatus,
-      marital_status: maritalStatus,
-      driving_license: isLicense,
-      profile_photo: imageFile,
+    const formDatas = {
+      // email: email,
+      // role_type: 4,
+      // status:1,
     };
 
     try {
-      const res = await newRequest.post(SAVE_MEMBER, formData);
+      const res = await newFormRequest.post(SAVE_MEMBER, formData);
       if (res?.data.success) {
         setLoader(false);
         toast.success("Profile Created  sucessfully");

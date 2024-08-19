@@ -86,18 +86,26 @@ export default function EducationDetail({
         </p>
         <div className="flex gap-4 items-center mt-3">
           <div
-            onClick={() => setEducationStatus("basic")}
-            className={`rounded-full border cursor-pointer  w-72 h-8 flex items-center justify-center ${
-              educationStatus === "basic" ? "active-option" : "border-[#808080]"
+            onClick={() => setEducationStatus("Basic")}
+            className={`rounded-full border cursor-pointer  w-fit px-3 h-8 flex items-center justify-center ${
+              educationStatus === "Basic" ? "active-option" : "border-[#808080]"
             }`}
           >
-            Basic (Bachelors/Diploma/School)
+            Basic
           </div>
           <div
-            onClick={() => setEducationStatus("masters")}
+            onClick={() => setEducationStatus("Basic(Bachelors/Diploma/School")}
+            className={`rounded-full border cursor-pointer  w-72 h-8 flex items-center justify-center ${
+              educationStatus === "Basic(Bachelors/Diploma/School" ? "active-option" : "border-[#808080]"
+            }`}
+          >
+            Basic(Bachelors/Diploma/School)
+          </div>
+          <div
+            onClick={() => setEducationStatus("Masters")}
             className={`rounded-full cursor-pointer border w-20 h-8 flex justify-center items-center
                   ${
-                    educationStatus === "masters"
+                    educationStatus === "Masters"
                       ? "active-option"
                       : "border-[#808080]"
                   }   `}
@@ -105,10 +113,10 @@ export default function EducationDetail({
             Masters
           </div>
           <div
-            onClick={() => setEducationStatus("doctorate")}
+            onClick={() => setEducationStatus("Doctorate")}
             className={`rounded-full cursor-pointer border w-28 h-8 flex justify-center items-center
                   ${
-                    educationStatus === "doctorate"
+                    educationStatus === "Doctorate"
                       ? "active-option"
                       : "border-[#808080]"
                   }   `}

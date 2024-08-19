@@ -73,7 +73,7 @@ export default function PersonalDetail({
               <input
                 type="text"
                 className="input-box"
-                {...register("firstName", { required: true })}
+                {...register("first_name", { required: true })}
               />
               {/* {errors.state && (
         <span className="text-xs font-medium text-red-500">
@@ -86,7 +86,9 @@ export default function PersonalDetail({
               <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
                 Middle Name
               </label>
-              <input type="text" className="input-box" />
+              <input 
+               {...register("middle_name", { required: true })}
+              type="text" className="input-box" />
               {/* {errors.state && (
         <span className="text-xs font-medium text-red-500">
           {errors.state?.message}
@@ -101,7 +103,7 @@ export default function PersonalDetail({
               <input
                 type="text"
                 className="input-box"
-                {...register("lastName", { required: true })}
+                {...register("last_name", { required: true })}
               />
               {/* {errors.state && (
         <span className="text-xs font-medium text-red-500">
@@ -283,7 +285,9 @@ export default function PersonalDetail({
             </label>
             <div className="flex gap-4 items-center">
               <div>
-                <input type="text" className="input-box !w-20" />
+                <input
+
+                 type="text" className="input-box !w-20" />
               </div>
               {/* <div className="!w-28 ">
                 <Controller
@@ -315,7 +319,7 @@ export default function PersonalDetail({
                 <input
                   type="text"
                   className="input-box !w-96"
-                  {...register("mobileNumber", { required: true })}
+                  {...register("mobile_number", { required: true })}
                 />
               </div>
             </div>
