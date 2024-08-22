@@ -18,8 +18,8 @@ export default function ProfileCreate() {
 
   console.log(educationStatus)
   const navigate = useNavigate();
-  const { id } = useUserStore((state) => state.user);
-  console.log(id);
+  const { user } = useUserStore((state) => state);
+  console.log(user)
   const {
     register,
     handleSubmit,
@@ -51,7 +51,7 @@ export default function ProfileCreate() {
         end_year: data?.endYear?.value,
         currency: data?.currency?.id,
         monthly_salary: data?.monthlySalary,
-        member: id,
+        member:user?.profile?.member
       },
       profile: {
         profile_heading: data?.profileHeading,
@@ -59,7 +59,7 @@ export default function ProfileCreate() {
         sub_industry: data?.subIndustry?.value,
         function_area: data?.functionalArea?.value,
         skills: data?.skills,
-        member: id,
+        member:user?.profile?.member
       },
       education: [
         {
@@ -69,6 +69,7 @@ export default function ProfileCreate() {
           university: data?.university?.id,
           education_location: data?.instituteLocation?.id,
           passing_year: data?.passingYear?.value,
+          member:user?.profile?.member
         },
       ],
     };
