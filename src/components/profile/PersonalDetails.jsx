@@ -1,21 +1,222 @@
-import { useQueryClient } from "@tanstack/react-query";
+import {
+  CITIES,
+  COUNTRIES,
+  LANGUAGES,
+  newRequest,
+  RELIGION,
+  STATES,
+} from "@/api";
+import { useUserStore } from "@/lib/user";
+import { customSelectStyles } from "@/utils/customStyles";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Pen } from "lucide-react";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import Select from "react-select";
 
 export default function PersonalDetails() {
   const [isEdit, setIsEdit] = useState(false);
   const [loader, setLoader] = useState(false);
   const queryClient = useQueryClient();
+  const { user } = useUserStore((state) => state);
+  const [visaStatus, setVisaStatus] = useState("");
+  const [maritalStatus, setMaritalStatus] = useState("");
+  const [isLicense, setIsLicense] = useState("");
+  const [selectedGender, setSelectedGender] = useState("");
+
   const {
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors },
   } = useForm({
     mode: "onSubmit",
     // resolver: yupResolver(schema),
   });
+
+  // GET all Countries
+  const [countries, setCountries] = useState("");
+  const { data: countriesListing } = useQuery({
+    queryKey: ["countriesListing"],
+    queryFn: () => newRequest.get(COUNTRIES).then((res) => res.data),
+  });
+
+  let countriesList = countriesListing?.map((i) => {
+    return { id: i.id, value: i.id, label: i?.name };
+  });
+  const handleCountries = (i) => {
+    setCountries(i);
+  };
+
+  // GET all States
+  const [states, setStates] = useState("");
+  const { data: statesListing } = useQuery({
+    queryKey: ["statesListing"],
+    queryFn: () => newRequest.get(STATES).then((res) => res.data),
+  });
+
+  let statesList = statesListing?.map((i) => {
+    return { id: i.id, value: i.id, label: i?.name };
+  });
+  const handleStates = (i) => {
+    setStates(i);
+  };
+
+  // GET all cities
+  const [selectedCities, setSelectedCities] = useState("");
+  const { data: citiesListing } = useQuery({
+    queryKey: ["citiesListing"],
+    queryFn: () => newRequest.get(CITIES).then((res) => res.data),
+  });
+
+  let citiesList = citiesListing?.map((i) => {
+    return { id: i.id, value: i.id, label: i?.name };
+  });
+  const handleCities = (i) => {
+    setSelectedCities(i);
+  };
+
+  // handle nationality
+  const [selectedNationality, setSelectedNationality] = useState("");
+  const handleNationality = (i) => {
+    setSelectedNationality(i);
+  };
+  const [selectedDriving, setSelectedDriving] = useState("");
+  const handleDriving = (i) => {
+    setSelectedDriving(i);
+  };
+
+  // get All Languages
+  const [selectedLanguage, setselectedLanguage] = useState("");
+  const { data: languagesListing } = useQuery({
+    queryKey: ["languagesListing"],
+    queryFn: () => newRequest.get(LANGUAGES).then((res) => res.data),
+  });
+
+  let languagesList = languagesListing?.map((i) => {
+    return { id: i.id, value: i.id, label: i?.name };
+  });
+  const handleLanguages = (i) => {
+    setselectedLanguage(i);
+  };
+
+  // get All Religion
+  const [selectedReligion, setSelectedReligion] = useState("");
+  const { data: religionListing } = useQuery({
+    queryKey: ["religionListing"],
+    queryFn: () => newRequest.get(RELIGION).then((res) => res.data),
+  });
+  let religionList = religionListing?.map((i) => {
+    return { id: i.id, value: i.id, label: i.name };
+  });
+  const handleReligion = (i) => {
+    setSelectedReligion(i);
+  };
+  const {
+    profile_photo,
+    first_name,
+    middle_name,
+    last_name,
+    email,
+    alternate_email,
+    progress,
+    mobile_number,
+    alternate_number,
+    profile,
+    date_of_birth,
+    gender,
+    marital_status,
+    driving_license,
+    visa_status,
+    linkedin_url,
+    nationality,
+    country,
+    state,
+    city,
+    languages,
+    religion,
+    license_issued_from,
+  } = user ?? {};
+
+  useEffect(() => {
+    if (user) {
+      setValue("date_of_birth", date_of_birth);
+      setValue("linkedin_url", linkedin_url);
+      setValue("alternate_number", alternate_number);
+      setValue("alternate_email", alternate_email);
+    }
+  }, [user]);
+console.log(country)
+  useEffect(() => {
+    if (user) {
+      const data = { id: country?.id, value: country?.id, label: country?.name };
+      setValue("country", data);
+      setCountries(data);
+    }
+  }, [user]);
+  useEffect(() => {
+    if (user) {
+      const data = { id: city?.id, value: city?.id, label: city?.name };
+      setValue("city", data);
+      setSelectedCities(data);
+    }
+  }, [user]);
+  useEffect(() => {
+    if (user) {
+      const data = { id: state?.id, value: state?.id, label: state?.name };
+      setValue("state", data);
+      setStates(data);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      const data = {
+        id: nationality?.id,
+        value: nationality?.id,
+        label: nationality?.name,
+      };
+      setValue("nationality", data);
+      setSelectedNationality(data);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      const data = {
+        id: license_issued_from?.id,
+        value: license_issued_from?.id,
+        label: license_issued_from?.name,
+      };
+      setValue("license_issued_from", data);
+      setSelectedDriving(data);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      const data = {
+        id: religion?.id,
+        value: religion?.id,
+        label: religion?.name,
+      };
+      setValue("religion", data);
+      setSelectedReligion(data);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      const data = {
+        id: languages?.id,
+        value: languages?.id,
+        label: languages?.name,
+      };
+      setValue("languages", data);
+      setselectedLanguage(data);
+    }
+  }, [user]);
   const onSubmit = (data) => {
     setLoader(true);
     handleProfile(data);
@@ -24,6 +225,10 @@ export default function PersonalDetails() {
     const formData = {
       skills: data?.skills,
     };
+    formData.append("gender", selectedGender);
+    formData.append("marital_status", maritalStatus);
+    formData.append("driving_license", isLicense);
+    formData.append("visa_status", visaStatus);
     try {
       const res =
         //  await newRequest.put(
@@ -41,6 +246,7 @@ export default function PersonalDetails() {
       console.log(error);
     }
   };
+
   return (
     <div className=" bg-white  rounded-md px-4 py-3">
       <div>
@@ -64,29 +270,31 @@ export default function PersonalDetails() {
           )}
         </div>
         {!isEdit ? (
-          <div className="rounded-md pl-20">
+          <div className="rounded-md pl-20 capitalize">
             {/* <div className="flex justify-between"> */}
-            <div className="grid grid-cols-4 gap-x-4 gap-y-6">
+            <div className="grid  grid-cols-3  gap-x-3 gap-y-6">
               <div className=" ">
                 <p className="text-sm">Date of Birth</p>
-                <p>August 17, 1997</p>
+                <p>{date_of_birth}</p>
               </div>
 
               <div className="">
                 <p className="text-sm">Gender</p>
-                <p>Male</p>
+                <p>{gender}</p>
               </div>
               <div className="">
                 <p className="text-sm">Nationality</p>
-                <p>Qatari</p>
+                <p>{nationality?.name}</p>
               </div>
               <div className="">
                 <p className="text-sm">Maritel Status</p>
-                <p>Married</p>
+                <p>{marital_status}</p>
               </div>
               <div className="">
                 <p className="text-sm">Driving License</p>
-                <p>Yes (Kuwait)</p>
+                <p>
+                  {driving_license} ({license_issued_from?.name})
+                </p>
               </div>
               <div className="">
                 <p className="text-sm">Current Location</p>
@@ -94,7 +302,7 @@ export default function PersonalDetails() {
               </div>
               <div className="">
                 <p className="text-sm">Visa Status for Current Location</p>
-                <p>Visit Visa</p>
+                <p>{visa_status}</p>
               </div>
               <div className="">
                 <p className="text-sm">Visa Expiry</p>
@@ -106,20 +314,23 @@ export default function PersonalDetails() {
               </div>
               <div className="">
                 <p className="text-sm">Religion</p>
-                <p>Jainism</p>
+                <p>{religion?.name}</p>
               </div>
               <div className="">
                 <p className="text-sm">Alternate Email Address</p>
-                <p>erdfghgh@fdgjh.com</p>
+                <p>{alternate_email}</p>
               </div>
               <div className="">
                 <p className="text-sm">Alternate Contact Number</p>
-                <p>+324 - 123456789908</p>
+                <p>{alternate_number}</p>
               </div>
               <div>
                 <p className="text-sm">LinkedIn URL</p>
-                <a href="#" className="text-sm text-blue-600">
-                  https://www.linkedin.com
+                <a
+                  href={linkedin_url}
+                  className="text-sm lowercase  text-blue-600"
+                >
+                  {linkedin_url}
                 </a>
               </div>
             </div>
@@ -131,7 +342,8 @@ export default function PersonalDetails() {
                 Date of Birth
               </label>
               <input
-                className="border border-[#407FFF] bg-[#E9EFFE] w-40 h-10 rounded-md px-2"
+                {...register("date_of_birth")}
+                className="border border-[#407FFF] bg-[#E9EFFE] w-56 h-10 rounded-md px-2"
                 type="date"
                 placeholder="Tell us your industry"
               />
@@ -141,11 +353,25 @@ export default function PersonalDetails() {
                 Gender
               </label>
 
-              <div className="flex gap-4">
-                <div className="border border-[#3467F6]  h-8 rounded-full w-20 flex items-center justify-center">
+              <div className="flex gap-4 items-center">
+                <div
+                  onClick={() => setSelectedGender("male")}
+                  className={`rounded-full border cursor-pointer  w-24 h-7 flex items-center justify-center ${
+                    selectedGender === "male"
+                      ? "active-option"
+                      : "border-[#808080]"
+                  }`}
+                >
                   Male
                 </div>
-                <div className="border border-[#3467F6]  h-8 rounded-full w-20 px-2 flex items-center justify-center">
+                <div
+                  onClick={() => setSelectedGender("female")}
+                  className={`rounded-full border cursor-pointer  w-24 h-7 flex items-center justify-center ${
+                    selectedGender === "female"
+                      ? "active-option"
+                      : "border-[#808080]"
+                  }`}
+                >
                   Female
                 </div>
               </div>
@@ -154,11 +380,29 @@ export default function PersonalDetails() {
               <label className="text-[#3A3A3A] text-base group-focus-within:text-[#2E2E2E] font-medium">
                 Nationality
               </label>
-
-              <input
-                className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md px-2"
-                type="text"
-                placeholder="Tell us your industry"
+              <Controller
+                name="nationality"
+                control={control}
+                defaultValue=""
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <Select
+                    selected={selectedNationality}
+                    value={selectedNationality}
+                    onChange={(selectedOption) => {
+                      handleNationality(selectedOption);
+                      field.onChange(selectedOption);
+                    }}
+                    components={{
+                      IndicatorSeparator: () => null,
+                    }}
+                    options={countriesList}
+                    isSearchable={true}
+                    styles={customSelectStyles}
+                    placeholder="Tell us your Country"
+                    className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md"
+                  />
+                )}
               />
             </div>
             <div className="flex px-3 group flex-col space-y-1">
@@ -166,20 +410,56 @@ export default function PersonalDetails() {
                 Marital Status
               </label>
 
-              <div className="flex gap-4">
-                <div className="border border-[#3467F6]  h-8 rounded-full w-20 flex items-center justify-center">
+              <div className="flex gap-3 max-w-xl flex-wrap items-center">
+                <div
+                  onClick={() => setMaritalStatus("single")}
+                  className={`rounded-full border cursor-pointer  w-fit px-2 text-sm h-7 flex items-center justify-center ${
+                    maritalStatus === "single"
+                      ? "active-option"
+                      : "border-[#808080]"
+                  }`}
+                >
                   Single
                 </div>
-                <div className="border border-[#3467F6]  h-8 rounded-full w-20 px-2 flex items-center justify-center">
+                <div
+                  onClick={() => setMaritalStatus("Married")}
+                  className={`rounded-full border cursor-pointer  w-fit px-2 text-sm h-7 flex items-center justify-center ${
+                    maritalStatus === "Married"
+                      ? "active-option"
+                      : "border-[#808080]"
+                  }`}
+                >
                   Married
                 </div>
-                <div className="border border-[#3467F6]  h-8 rounded-full w-24 px-2 flex items-center justify-center">
+                <div
+                  onClick={() => setMaritalStatus("Divorced")}
+                  className={`rounded-full border cursor-pointer  w-fit px-2 text-sm h-7 flex items-center justify-center ${
+                    maritalStatus === "Divorced"
+                      ? "active-option"
+                      : "border-[#808080]"
+                  }`}
+                >
                   Divorced
                 </div>
-                <div className="border border-[#3467F6]  h-8 rounded-full w-24 px-2 flex items-center justify-center">
+                <div
+                  onClick={() => setMaritalStatus("Widower")}
+                  className={`rounded-full border cursor-pointer  w-fit px-2 text-sm h-7 flex items-center justify-center ${
+                    maritalStatus === "Widower"
+                      ? "active-option"
+                      : "border-[#808080]"
+                  }`}
+                >
                   Widow(er)
                 </div>
-                <div className="border border-[#3467F6]  h-8 rounded-full w-20 px-2 flex items-center justify-center">
+
+                <div
+                  onClick={() => setMaritalStatus("other")}
+                  className={`rounded-full border cursor-pointer  w-fit px-2 text-sm h-7 flex items-center justify-center ${
+                    maritalStatus === "other"
+                      ? "active-option"
+                      : "border-[#808080]"
+                  }`}
+                >
                   Other
                 </div>
               </div>
@@ -188,11 +468,21 @@ export default function PersonalDetails() {
               <label className="text-[#3A3A3A] text-base group-focus-within:text-[#2E2E2E] font-medium">
                 Do you have a Driving License ?
               </label>
-              <div className="flex gap-4">
-                <div className="border border-[#3467F6]  h-8 rounded-full w-20 flex items-center justify-center">
+              <div className="flex gap-5 items-center">
+                <div
+                  onClick={() => setIsLicense("yes")}
+                  className={`rounded-full border cursor-pointer  w-fit px-2 text-sm h-7 flex items-center justify-center ${
+                    isLicense === "yes" ? "active-option" : "border-[#808080]"
+                  }`}
+                >
                   Yes
                 </div>
-                <div className="border border-[#3467F6]  h-8 rounded-full w-20 px-2 flex items-center justify-center">
+                <div
+                  onClick={() => setIsLicense("no")}
+                  className={`rounded-full border cursor-pointer  w-fit px-2 text-sm h-7 flex items-center justify-center ${
+                    isLicense === "no" ? "active-option" : "border-[#808080]"
+                  }`}
+                >
                   No
                 </div>
               </div>
@@ -201,10 +491,30 @@ export default function PersonalDetails() {
               <label className="text-[#3A3A3A] text-base group-focus-within:text-[#2E2E2E] font-medium">
                 Driving License issued from
               </label>
-              <input
-                className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md px-2"
-                type="text"
-                placeholder="Tell us your industry"
+              <Controller
+                name="license_issued_from"
+                control={control}
+                defaultValue=""
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <Select
+                    required
+                    selected={selectedDriving}
+                    value={selectedDriving}
+                    onChange={(selectedOption) => {
+                      handleDriving(selectedOption);
+                      field.onChange(selectedOption);
+                    }}
+                    components={{
+                      IndicatorSeparator: () => null,
+                    }}
+                    options={countriesList}
+                    isSearchable={true}
+                    styles={customSelectStyles}
+                    placeholder="Tell us your Country"
+                    className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md"
+                  />
+                )}
               />
             </div>
             <div className="flex px-3 group flex-col space-y-1">
@@ -212,20 +522,80 @@ export default function PersonalDetails() {
                 Current Location
               </label>
               <div className="grid grid-cols-3 gap-x-3">
-                <input
-                  className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md px-2"
-                  type="text"
-                  placeholder="Tell us your industry"
+                <Controller
+                  name="country"
+                  control={control}
+                  defaultValue=""
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <Select
+                      required
+                      selected={countries}
+                      value={countries}
+                      onChange={(selectedOption) => {
+                        handleCountries(selectedOption);
+                        field.onChange(selectedOption);
+                      }}
+                      components={{
+                        IndicatorSeparator: () => null,
+                      }}
+                      options={countriesList}
+                      isSearchable={true}
+                      styles={customSelectStyles}
+                      placeholder="Tell us your Country"
+                      className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md"
+                    />
+                  )}
                 />
-                <input
-                  className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md px-2"
-                  type="text"
-                  placeholder="Tell us your industry"
+                <Controller
+                  name="state"
+                  control={control}
+                  defaultValue=""
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <Select
+                      required
+                      selected={states}
+                      value={states}
+                      onChange={(selectedOption) => {
+                        handleStates(selectedOption);
+                        field.onChange(selectedOption);
+                      }}
+                      components={{
+                        IndicatorSeparator: () => null,
+                      }}
+                      options={statesList}
+                      isSearchable={true}
+                      styles={customSelectStyles}
+                      placeholder="Tell us your Country"
+                      className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md"
+                    />
+                  )}
                 />
-                <input
-                  className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md px-2"
-                  type="text"
-                  placeholder="Tell us your industry"
+                <Controller
+                  name="city"
+                  control={control}
+                  defaultValue=""
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <Select
+                      required
+                      selected={selectedCities}
+                      value={selectedCities}
+                      onChange={(selectedOption) => {
+                        handleCities(selectedOption);
+                        field.onChange(selectedOption);
+                      }}
+                      components={{
+                        IndicatorSeparator: () => null,
+                      }}
+                      options={citiesList}
+                      isSearchable={true}
+                      styles={customSelectStyles}
+                      placeholder="Tell us your Country"
+                      className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md"
+                    />
+                  )}
                 />
               </div>
             </div>
@@ -234,21 +604,75 @@ export default function PersonalDetails() {
                 What is your visa status in the residing Country ?
               </label>
 
-              <div className="flex gap-x-3 gap-y-2 flex-wrap">
-                <div className="border border-[#3467F6]  h-8 rounded-full px-3 flex items-center justify-center">
-                  Citizen / Bahraini
+              <div className="flex flex-wrap max-w-xl group my-2 items-center gap-3 ">
+                <div
+                  onClick={() => setVisaStatus("citizen")}
+                  className={`rounded-full border cursor-pointer  w-fit px-2 text-sm h-7 flex items-center justify-center ${
+                    visaStatus === "citizen"
+                      ? "active-option"
+                      : "border-[#808080]"
+                  }`}
+                >
+                  Citizen
                 </div>
-                <div className="border border-[#3467F6]  h-8 rounded-full  px-3 flex items-center justify-center">
+                <div
+                  onClick={() => setVisaStatus("entry")}
+                  className={`rounded-full border cursor-pointer  w-fit px-2 text-sm h-7 flex items-center justify-center ${
+                    visaStatus === "entry"
+                      ? "active-option"
+                      : "border-[#808080]"
+                  }`}
+                >
                   Visit Visa / Entry Visa
                 </div>
-                <div className="border border-[#3467F6]  h-8 rounded-full  px-3 flex items-center justify-center">
+                <div
+                  onClick={() => setVisaStatus("student")}
+                  className={`rounded-full border cursor-pointer  w-fit px-2 text-sm h-7 flex items-center justify-center ${
+                    visaStatus === "student"
+                      ? "active-option"
+                      : "border-[#808080]"
+                  }`}
+                >
                   Student Visa
                 </div>
-                <div className="border border-[#3467F6]  h-8 rounded-full  px-3 flex items-center justify-center">
+                <div
+                  onClick={() => setVisaStatus("work")}
+                  className={`rounded-full border cursor-pointer  w-fit px-2 text-sm h-7 flex items-center justify-center ${
+                    visaStatus === "work" ? "active-option" : "border-[#808080]"
+                  }`}
+                >
                   Work Visa / Employment Visa
                 </div>
-                <div className="border border-[#3467F6]  h-8 rounded-full  px-3 flex items-center justify-center">
-                  Dependent Visa / Family Visa Other
+                <div
+                  onClick={() => setVisaStatus("family")}
+                  className={`rounded-full border cursor-pointer  w-fit px-2 text-sm h-7 flex items-center justify-center ${
+                    visaStatus === "family"
+                      ? "active-option"
+                      : "border-[#808080]"
+                  }`}
+                >
+                  Dependent Visa / Family Visa
+                </div>
+                <div
+                  onClick={() => setVisaStatus("freelancer")}
+                  className={`rounded-full border cursor-pointer  w-fit px-2 text-sm h-7 flex items-center justify-center ${
+                    visaStatus === "freelancer"
+                      ? "active-option"
+                      : "border-[#808080]"
+                  }`}
+                >
+                  Freelancer Visa
+                </div>
+
+                <div
+                  onClick={() => setVisaStatus("others")}
+                  className={`rounded-full border cursor-pointer  w-fit px-2 text-sm h-7 flex items-center justify-center ${
+                    visaStatus === "others"
+                      ? "active-option"
+                      : "border-[#808080]"
+                  }`}
+                >
+                  Others
                 </div>
               </div>
             </div>
@@ -268,10 +692,30 @@ export default function PersonalDetails() {
                 Languages Known (Max 3)
               </label>
 
-              <input
-                className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md px-2"
-                type="text"
-                placeholder="Tell us your industry"
+              <Controller
+                name="languages"
+                control={control}
+                defaultValue=""
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <Select
+                    required
+                    selected={selectedLanguage}
+                    value={selectedLanguage}
+                    onChange={(selectedOption) => {
+                      handleLanguages(selectedOption);
+                      field.onChange(selectedOption);
+                    }}
+                    components={{
+                      IndicatorSeparator: () => null,
+                    }}
+                    options={languagesList}
+                    isSearchable={true}
+                    styles={customSelectStyles}
+                    placeholder="Tell us your Country"
+                    className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md"
+                  />
+                )}
               />
             </div>
             <div className="flex px-3 group flex-col space-y-1">
@@ -279,10 +723,30 @@ export default function PersonalDetails() {
                 Religion
               </label>
 
-              <input
-                className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md px-2"
-                type="text"
-                placeholder="Tell us your industry"
+              <Controller
+                name="religion"
+                control={control}
+                defaultValue=""
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <Select
+                    required
+                    selected={selectedReligion}
+                    value={selectedReligion}
+                    onChange={(selectedOption) => {
+                      handleReligion(selectedOption);
+                      field.onChange(selectedOption);
+                    }}
+                    components={{
+                      IndicatorSeparator: () => null,
+                    }}
+                    options={religionList}
+                    isSearchable={true}
+                    styles={customSelectStyles}
+                    placeholder="Tell us your Country"
+                    className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md"
+                  />
+                )}
               />
             </div>
             <div className="flex px-3 group flex-col space-y-1">
@@ -291,6 +755,7 @@ export default function PersonalDetails() {
               </label>
 
               <input
+                {...register("alternate_email")}
                 className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md px-2"
                 type="text"
                 placeholder="Tell us your industry"
@@ -307,6 +772,7 @@ export default function PersonalDetails() {
                   placeholder="Tell us your industry"
                 />
                 <input
+                  {...register("alternate_number")}
                   className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md px-2"
                   type="text"
                   placeholder="Tell us your industry"
@@ -319,6 +785,7 @@ export default function PersonalDetails() {
               </label>
 
               <input
+                {...register("linkedin_url")}
                 className="border border-[#407FFF] bg-[#E9EFFE] w-full h-10 rounded-md px-2"
                 type="text"
                 placeholder="Tell us your industry"

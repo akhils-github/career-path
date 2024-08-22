@@ -3,13 +3,15 @@ import daisyui from 'daisyui';
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,jsx}",
+    "./components/**/*.{js,jsx}",
+    "./app/**/*.{js,jsx}",
+    "./src/**/*.{js,jsx}",
   ],
   theme: {
     extend: {},
   },
-  plugins: [daisyui,],
+  plugins: [daisyui],
   daisyui: {
     darkTheme: "light",
     base:false

@@ -12,6 +12,7 @@ import {
   LOCATIONS_LIST,
   newRequest,
   SPECIALIZATION,
+  UNIVERSITY_LIST,
 } from "../../api";
 
 export default function EducationDetail({
@@ -31,21 +32,21 @@ export default function EducationDetail({
     setSelectedYear(i);
   };
 
-    //GET ALL COURSES
-    const [courses, setCourses] = useState("");
-    const { data: courseListing } = useQuery({
-      queryKey: ["courseListing"],
-      queryFn: () => newRequest.get(COURSES_LIST).then((res) => res.data),
-    });
-    console.log(courseListing);
-    let courseList = courseListing?.map((i) => {
-      return { id: i.id, value: i.id, label: i.name };
-    });
-    const handleCourse = (i) => {
-      setCourses(i);
-    };
+  //GET ALL COURSES
+  const [courses, setCourses] = useState("");
+  const { data: courseListing } = useQuery({
+    queryKey: ["courseListing"],
+    queryFn: () => newRequest.get(COURSES_LIST).then((res) => res.data),
+  });
+  console.log(courseListing);
+  let courseList = courseListing?.map((i) => {
+    return { id: i.id, value: i.id, label: i.name };
+  });
+  const handleCourse = (i) => {
+    setCourses(i);
+  };
 
-      //GET SPECIALIZATION
+  //GET SPECIALIZATION
   const [specialization, setSpecialization] = useState("");
   const { data: specializationListing } = useQuery({
     queryKey: ["specializationListing"],
@@ -59,22 +60,33 @@ export default function EducationDetail({
     setSpecialization(i);
   };
 
+  //GET LOCATION LIST
+  const [university, setUniversity] = useState("");
+  const { data: universityListing } = useQuery({
+    queryKey: ["universityListing"],
+    queryFn: () => newRequest.get(UNIVERSITY_LIST).then((res) => res.data),
+  });
+  console.log(universityListing);
+  let universityList = universityListing?.map((i) => {
+    return { id: i.id, value: i.id, label: i.name };
+  });
+  const handleUniversity = (i) => {
+    setUniversity(i);
+  };
 
-
-      //GET LOCATION LIST
+  //GET UNIVERSITY LIST
   const [location, setLocation] = useState("");
   const { data: locationListing } = useQuery({
     queryKey: ["locationListing"],
     queryFn: () => newRequest.get(LOCATIONS_LIST).then((res) => res.data),
   });
-  console.log(locationListing);
   let locationList = locationListing?.map((i) => {
     return { id: i.id, value: i.id, label: i.name };
   });
   const handleLocation = (i) => {
     setLocation(i);
   };
-    
+
   return (
     <div className="bg-white px-8 py-6">
       <div className="px-3 pb-6">
@@ -91,24 +103,15 @@ export default function EducationDetail({
               educationStatus === "Basic" ? "active-option" : "border-[#808080]"
             }`}
           >
-            Basic
-          </div>
-          <div
-            onClick={() => setEducationStatus("Basic(Bachelors/Diploma/School")}
-            className={`rounded-full border cursor-pointer  w-72 h-8 flex items-center justify-center ${
-              educationStatus === "Basic(Bachelors/Diploma/School" ? "active-option" : "border-[#808080]"
-            }`}
-          >
             Basic(Bachelors/Diploma/School)
           </div>
           <div
             onClick={() => setEducationStatus("Masters")}
-            className={`rounded-full cursor-pointer border w-20 h-8 flex justify-center items-center
-                  ${
-                    educationStatus === "Masters"
-                      ? "active-option"
-                      : "border-[#808080]"
-                  }   `}
+            className={`rounded-full border cursor-pointer  w-fit px-3 h-8 flex items-center justify-center ${
+              educationStatus === "Masters"
+                ? "active-option"
+                : "border-[#808080]"
+            }`}
           >
             Masters
           </div>
@@ -203,10 +206,30 @@ export default function EducationDetail({
           <label className="text-[#3A3A3A] text-[0.8rem] group-focus-within:text-[#2E2E2E] font-medium">
             University / Institute
           </label>
-          <input
-            type="text"
-            className="input-box"
-            {...register("university", { required: false })}
+          <Controller
+            name="university"
+            control={control}
+            defaultValue=""
+            // rules={{ required: true }}
+            render={({ field }) => (
+              <Select
+                // required
+                selected={university}
+                value={university}
+                onChange={(selectedOption) => {
+                  handleUniversity(selectedOption);
+                  field.onChange(selectedOption);
+                }}
+                components={{
+                  IndicatorSeparator: () => null,
+                }}
+                options={universityList}
+                isSearchable={true}
+                styles={customSelectStyles}
+                placeholder="Select"
+                className="rounded border border-[#C7C7C7] w-full focus:border-[#2E2E2E] text-sm border-opacity-60 h-10 text-zinc-500"
+              />
+            )}
           />
           {/* {errors.state && (
         <span className="text-xs font-medium text-red-500">
@@ -305,4 +328,3 @@ export default function EducationDetail({
     </div>
   );
 }
-

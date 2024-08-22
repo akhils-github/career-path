@@ -1,8 +1,10 @@
+import { useUserStore } from "@/lib/user";
 import React from "react";
 import { useLocation } from "react-router";
 
 export default function AccountSideBar() {
   const { pathname } = useLocation();
+
   console.log(pathname);
 
   return (

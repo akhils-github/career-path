@@ -1,8 +1,10 @@
 import axios from "axios";
-
+console.log(import.meta.env.MODE);
 // Axios instances
 const baseConfig = {
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: import.meta.env.MODE
+    ? import.meta.env.VITE_DEV_BASE_URL
+    : import.meta.env.VITE_BASE_URL,
 };
 export const basicRequest = axios.create(baseConfig);
 
@@ -34,7 +36,6 @@ export const newFormRequest = axios.create({
     "Content-Type": "multipart/form-data",
   },
 });
-
 
 newRequest.interceptors.request.use((config) => {
   const localData = JSON.parse(localStorage.getItem("resData"));
@@ -72,6 +73,18 @@ export const GOOGLE_LOGIN = "users/google_login/";
 export const FACEBOOK_LOGIN = "users/facebook_login/";
 export const LINKEDIN_LOGIN = "users/linkedin_login/";
 
+//ACCOUNTS
+export const GET_USER = "users/profile";
+export const UPDATE_USER = "users/members";
+export const UPDATE_SUMMARY = "users/summary_edit";
+export const GET_SUMMARY = "users/summary";
+
+
+//MASTERS
+export const UNIVERSITY_LIST = "users/universities_list/";
+export const CERTIFICATION_VIEW = "users/certification";
+
+
 //profile create
 export const INDUSTRIES = "users/industries/";
 export const SUB_INDUSTRIES = "users/sub-industries/";
@@ -89,7 +102,7 @@ export const LOCATIONS_LIST = "users/locations_list/";
 export const LANGUAGES = "users/languages/";
 export const RELIGION = "users/religions/";
 export const SAVE_MEMBER = "users/save_member/";
+export const GET_EMPLOYMENT = "users/employment";
 
 export const GET_PROFILES = "users/profile/";
 export const PROFILE_UPDATE = "users/profile_update/";
-

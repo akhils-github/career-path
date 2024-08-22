@@ -17,6 +17,7 @@ export default function AppRoutes() {
       <Routes>
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/succes" element={<SignIn />} />
+        
         <Route path="/" element={<AccountLayout />}>
           <Route index element={<SignUp />} />
           <Route path="sign-up" element={<SignUp />} />

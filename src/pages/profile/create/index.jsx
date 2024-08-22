@@ -8,11 +8,13 @@ import EducationDetail from "../../../components/accounts/Education";
 import { newFormRequest, newRequest, PROFILE_CREATE } from "../../../api";
 import { useUserStore } from "../../../lib/user";
 import { useNavigate } from "react-router";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function ProfileCreate() {
   const [loader, setLoader] = useState(false);
   const [workingStatus, setWorkingStatus] = useState("");
   const [educationStatus, setEducationStatus] = useState("");
+  const queryClient = useQueryClient()
 
   console.log(educationStatus)
   const navigate = useNavigate();
@@ -64,7 +66,7 @@ export default function ProfileCreate() {
           highest_qualification: educationStatus,
           course: data?.course?.id,
           specialization: data?.specialization?.id,
-          university: data?.university,
+          university: data?.university?.id,
           education_location: data?.instituteLocation?.id,
           passing_year: data?.passingYear?.value,
         },
@@ -73,15 +75,16 @@ export default function ProfileCreate() {
 
     try {
       const res = await newRequest.post(PROFILE_CREATE, formData);
-      if (res.status == 200) {
+      console.log(res)
+      if (res?.data.success) {
         setLoader(false);
         toast.success("Profile Created  sucessfully");
         navigate("/profile-detail");
-        // queryClient.invalidateQueries([""]);
+        queryClient.invalidateQueries(["profile"]);
       }
     } catch (error) {
       setLoader(false);
-      if (error.response.status === 422) {
+      if (error.data.error) {
         toast.error("already exists");
       }
       console.error(error);

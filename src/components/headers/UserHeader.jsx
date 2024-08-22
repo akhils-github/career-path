@@ -11,11 +11,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { Fragment } from "react";
 
 import { Menu, Transition } from "@headlessui/react";
+import { useUserStore } from "@/lib/user";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 export default function UserHeader() {
+  const { user } = useUserStore((state) => state);
+  console.log(user)
+
   return (
     <header className="w-full bg-white  py-4 bg-left bg-cover bg-no-repeat h-52  text-[#1E3964] ">
       <div className="flex justify-between px-14">
@@ -49,13 +53,12 @@ export default function UserHeader() {
                 <div className="border border-white/20 py-1 px-2 rounded-full flex gap-3 items-center w-40 h-12 text-[#1E3964]">
                   <img
                     className="rounded-full w-9 h-9"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                    src={user?.profile_photo}
                     alt=""
                   />
                   <div className="flex cursor-pointer flex-col">
                     <span className="text-[0.9rem] capitalize font-semibold">
-                      Robert
-                      {/* {customerProfile?.firstname} {customerProfile?.lastname} */}
+                      {user?.first_name} 
                     </span>
                     {/* <span className="text-[0.61rem] font-normal">Customer</span> */}
                   </div>

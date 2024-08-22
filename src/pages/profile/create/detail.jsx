@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import ProfileProgress from "../../../components/accounts/ProfileProgress";
 import EmploymentDetail from "../../../components/accounts/EmploymentDetail";
@@ -16,8 +16,10 @@ import { useNavigate } from "react-router";
 
 export default function ProfileDetail() {
   const { email } = useUserStore((state) => state.user);
+  const queryClient = useQueryClient()
+
   console.log(email);
-  const { image, base64Image, imageFile, handleImage, removeImage } =
+  const { image, imageFile, handleImage, removeImage } =
     useImageUploader();
   // const [base64String, setBase64String] = useState("");
 
@@ -30,7 +32,6 @@ export default function ProfileDetail() {
 
   const navigate = useNavigate();
 
-  console.log(base64Image);
 
   const { data: countriesListing } = useQuery({
     queryKey: ["countriesListing"],
@@ -57,30 +58,25 @@ export default function ProfileDetail() {
     const formData = new FormData();
 
     Object.keys(data).forEach((key) => {
-      formData.append(key, data[key]);
+      const value = data[key];
+      if (Array.isArray(value)) {
+          value.forEach(item => formData.append(`${key}`, item.id));
+      } else {
+          formData.append(key, typeof value === 'object' ? value.id : value);
+      }
+      // formData.append(key, data[key]);
     });
     formData.append("email", email);
-    formData.append("role_type", 1);
+    formData.append("role_type", 4);
     formData.append("status", 1);
-    formData.append("profile_photo", 1);
+    formData.append("profile_photo", imageFile);
+    formData.append("gender", gender);
     formData.append("marital_status", maritalStatus);
     formData.append("visa_status", visaStatus);
     formData.append("driving_license", isLicense);
     
 
-
-
-
-
-
-
-    const languageIds = data?.languages?.map((item) => item.id);
-    console.log(data);
-    const formDatas = {
-      // email: email,
-      // role_type: 4,
-      // status:1,
-    };
+console.log(formData)
 
     try {
       const res = await newFormRequest.post(SAVE_MEMBER, formData);
@@ -88,7 +84,7 @@ export default function ProfileDetail() {
         setLoader(false);
         toast.success("Profile Created  sucessfully");
         navigate("/profile");
-        // queryClient.invalidateQueries([""]);
+        queryClient.invalidateQueries(["profile"]);
       }
     } catch (error) {
       setLoader(false);

@@ -14,8 +14,11 @@ import KeySkills from "../../../components/profile/KeySkills";
 import Summary from "../../../components/profile/Summary";
 import { Check } from "lucide-react";
 import { GET_PROFILES, newRequest } from "../../../api";
+import { useUserStore } from "@/lib/user";
 
 export default function ProfileDetailView() {
+  const { user } = useUserStore((state) => state);
+
   const { data: profileListing } = useQuery({
     queryKey: ["profileListing"],
     queryFn: () => newRequest.get(GET_PROFILES).then((res) => res.data),
@@ -31,7 +34,7 @@ export default function ProfileDetailView() {
         <div className="flex-[0.7] flex flex-col gap-4  ">
           <CVHeadline profile={profile} />
           <KeySkills profile={profile} />
-          <Summary userData={profileListing} />
+          <Summary userData={user} />
           <Employment details={profile?.employer_details} />
           <ITSkills />
           <EducationDetails />

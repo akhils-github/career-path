@@ -35,7 +35,7 @@ export default function CVHeadline({ profile }) {
     };
     try {
       const res = await newRequest.put(
-        `${PROFILE_UPDATE}${profile?.id}/`,
+        `${PROFILE_UPDATE}`,
         formData
       );
       console.log(res);

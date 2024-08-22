@@ -37,7 +37,7 @@ export default function KeySkills({ profile }) {
     };
     try {
       const res = await newRequest.put(
-        `${PROFILE_UPDATE}${profile?.id}/`,
+        `${PROFILE_UPDATE}`,
         formData
       );
       console.log(res);

@@ -21,15 +21,10 @@ export default function SignUp() {
   const [loader, setLoader] = useState(false);
   const [experience, setExperience] = useState("");
 
-  const {
-    image ,
-    imageFile,
-    handleImage,
-    removeImage,
-  } = useImageUploader();
+  const { image, imageFile, handleImage, removeImage } = useImageUploader();
 
-  console.log(imageFile)
-console.log(experience)
+  console.log(image);
+  console.log(imageFile);
   const {
     register,
     handleSubmit,
@@ -45,12 +40,13 @@ console.log(experience)
   };
 
   const registerUser = async (data) => {
-    console.log(data)
-    if(!data.terms){
-      toast.error("You must agree to the Terms and Conditions & Privacy Policy");
+    console.log(data);
+    if (!data.terms) {
+      toast.error(
+        "You must agree to the Terms and Conditions & Privacy Policy"
+      );
       setLoader(false);
-      return
-
+      return;
     }
     const formData = new FormData();
     formData.append("email", data.email);
@@ -60,8 +56,6 @@ console.log(experience)
     formData.append("agreed_to_terms", data.terms);
     imageFile && formData.append("cv_file", imageFile);
 
-
-
     try {
       const res = await newFormRequest.post(REGISTER_USER, formData);
       console.log(res.data);
@@ -70,7 +64,7 @@ console.log(experience)
         setLoader(false);
         toast.success("User registered successfully");
         localStorage.setItem("resData", JSON.stringify(res.data));
-        setUser(res.data)
+        setUser(res.data);
         navigate("/profile-create");
       } else {
         setLoader(false);
@@ -103,9 +97,9 @@ console.log(experience)
           Create account faster using
         </h3>
         <div className="flex flex-wrap lg:justify-start justify-center gap-2 py-2.5 px-3 items-center">
-         <GoogleLoginPage/> 
-         {/* <GooglBtn />  */}
-         <FacebookBtn /> <LinkedInBtn />
+          <GoogleLoginPage />
+          {/* <GooglBtn />  */}
+          <FacebookBtn /> <LinkedInBtn />
         </div>
         <div className="h-4  border-b relative border-[#0000004D] text-[#0000004D] text-xl mx-3 ">
           <span className="bg-white absolute left-44 px-3">Or</span>
@@ -197,12 +191,22 @@ console.log(experience)
               <input
                 id="cv"
                 onChange={handleImage}
-              type="file"
+                type="file"
                 className="hidden"
               />
-              <img src="/icons/upload.svg" alt="" className="w-8" />
-              <span className="text-[#275DF5] font-semibold">Browse</span>
-              file to upload
+              {imageFile ? (
+                <>
+                  {/* <img src="/icons/upload.svg" alt="" className="w-8" /> */}
+                  <span className="text-[#275DF5] font-semibold">{imageFile?.name}</span>
+                  
+                </>
+              ) : (
+                <>
+                  <img src="/icons/upload.svg" alt="" className="w-8" />
+                  <span className="text-[#275DF5] font-semibold">Browse</span>
+                  file to upload
+                </>
+              )}
             </label>
             <span className="text-xs font-medium text-[#00000080]">
               Supported file formats: doc, docx, pdf, rtf | upto 2 MB
@@ -222,7 +226,7 @@ console.log(experience)
             </span>
           </div>
 
-          <button  className="bg-[#1E3964] lg:my-5 h-8 w-48 rounded-full text-sm  flex  justify-center items-center text-white gap-2 ">
+          <button className="bg-[#1E3964] lg:my-5 h-8 w-48 rounded-full text-sm  flex  justify-center items-center text-white gap-2 ">
             {loader ? (
               <div className="flex items-center gap-3">
                 <div className="h-5 w-5 animate-spin rounded-full border-b-2 border-white"></div>
